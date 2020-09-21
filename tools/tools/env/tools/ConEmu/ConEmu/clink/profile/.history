@@ -1,0 +1,2 @@
+scons --dist
+scons --dist

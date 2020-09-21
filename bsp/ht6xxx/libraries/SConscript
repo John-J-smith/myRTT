@@ -1,0 +1,40 @@
+import rtconfig
+Import('RTT_ROOT')
+from building import *
+
+# get current directory
+cwd = GetCurrentDir()
+
+# The set of source files associated with this SConscript file.
+src = Split("""
+CMSIS/CM0/DeviceSupport/Src/system_ht6xxx.c
+HT60xx_StdPeriph_Driver/Src/ht6x3x_emu.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_aes&rand.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_cmu.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_crc.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_dma.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_ecc.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_exti.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_flash.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_gpio.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_iic.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_lcd.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_pmu.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_reset.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_rtc.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_spi.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_tbs.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_tdes&rand.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_timer.c
+HT60xx_StdPeriph_Driver/Src/ht6xxx_uart&7816.c
+""")
+
+path = [cwd + '/CMSIS/CM0/DeviceSupport/Inc', 
+    cwd + '/HT60xx_StdPeriph_Driver/Inc',
+    cwd + '/HT60xx_StdPeriph_Driver',
+    cwd + '/CMSIS/CM0/CoreSupport']
+
+CPPDEFINES = ['HT6x3x']
+group = DefineGroup('ht6xxx_hal', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('group')

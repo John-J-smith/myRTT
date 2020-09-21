@@ -1,0 +1,33 @@
+{
+    "version": 4,
+    "configurations": [
+        {
+            "name": "IAR",
+            "defines": [
+                "HT6x3x=",
+                "HT6x3x="
+            ],
+            "includePath": [
+                "d:\\rtt_prj\\bsp\\ht6xxx\\libraries\\CMSIS\\CM0\\DeviceSupport\\Inc",
+                "d:\\rtt_prj\\include",
+                "d:\\rtt_prj\\bsp\\ht6xxx\\drivers",
+                "d:\\rtt_prj\\components\\libc\\compilers\\common",
+                "d:\\rtt_prj\\bsp\\ht6xxx",
+                "d:\\rtt_prj\\bsp\\ht6xxx\\applications",
+                "d:\\rtt_prj\\libcpu\\arm\\cortex-m0",
+                "d:\\rtt_prj\\components\\drivers\\include",
+                "d:\\rtt_prj\\libcpu\\arm\\common",
+                "d:\\rtt_prj\\bsp\\ht6xxx\\libraries\\CMSIS\\CM0\\CoreSupport",
+                "d:\\rtt_prj\\bsp\\ht6xxx\\libraries\\HT60xx_StdPeriph_Driver\\Inc",
+                "d:\\rtt_prj\\components\\finsh",
+                "d:\\rtt_prj\\bsp\\ht6xxx\\libraries\\HT60xx_StdPeriph_Driver"
+            ],
+            "forcedInclude": [],
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "compilerPath": "",
+            "intelliSenseMode": "msvc-x64",
+            "configurationProvider": "pluyckx.iar-vsc"
+        }
+    ]
+}
