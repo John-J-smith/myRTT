@@ -2316,9 +2316,6 @@
     <group>
         <name>Applications</name>
         <file>
-            <name>$PROJ_DIR$\applications\eeprom.c</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\applications\main.c</name>
         </file>
     </group>
@@ -2398,6 +2395,12 @@
         <name>Drivers</name>
         <file>
             <name>$PROJ_DIR$\drivers\board.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\drivers\drv_eeprom.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\drivers\drv_flash.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\drivers\drv_gpio.c</name>

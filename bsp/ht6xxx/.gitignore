@@ -7,6 +7,7 @@
 *.axf
 *.exe
 *.pdb
+*.xcl
 *.idb
 *.ilk
 *.old
@@ -40,3 +41,32 @@ RTE/
 settings/
 *.uvguix*
 cconfig.h
+
+# Object files
+*.ko
+*.elf
+*.pbi
+*.cout
+*.sim
+*.hex
+*.bin
+*.browse
+*.pbd
+
+# iar setting
+*.wsdt
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo

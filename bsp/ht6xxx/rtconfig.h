@@ -175,6 +175,8 @@
 
 /* Onboard Peripheral Drivers */
 
+#define BSP_USING_EEPROM
+
 /* On-chip Peripheral Drivers */
 
 #define BSP_USING_GPIO

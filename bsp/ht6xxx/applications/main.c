@@ -20,9 +20,11 @@
 #include <syslog.h>
 #endif /* ULOG_USING_SYSLOG */
 
-int count1 = 0;
+
 void thread1_entry(void* parameter)
 {
+    int count1 = 0;
+
     while (1)
     {
         //LOG_I("Thread1 count:%d", ++count1);
@@ -31,7 +33,6 @@ void thread1_entry(void* parameter)
     }
 }
 
-char buf[128];
 void thread2_entry(void* parameter)
 {
     rt_device_t uart3;
@@ -45,7 +46,6 @@ void thread2_entry(void* parameter)
     }
 }
 
-int count3 = 0;
 void thread3_entry(void* parameter)
 {
     rt_pin_mode(IO_RUN_LED, PIN_MODE_OUTPUT);
@@ -61,7 +61,6 @@ void thread3_entry(void* parameter)
     rt_pin_mode(IO_485_LED, PIN_MODE_OUTPUT);
     while (1)
     {
-        count3++;
         rt_pin_write(IO_RUN_LED, PIN_HIGH);
         rt_pin_write(IO_TX_LED, PIN_HIGH);
         rt_pin_write(IO_RX_LED, PIN_HIGH);

@@ -9,6 +9,16 @@ config SOC_HT6x3x
 
 menu "Onboard Peripheral Drivers"
 
+	config BSP_USING_EEPROM
+        bool "Enable eeprom"
+        select BSP_USING_I2C
+        default y
+		
+	config BSP_USING_FLASH
+        bool "Enable data flash"
+        select BSP_USING_SPI
+        default y
+
 endmenu
 
 menu "On-chip Peripheral Drivers"
@@ -77,9 +87,6 @@ menu "On-chip Peripheral Drivers"
 					bool "Enable SPI1"
 					default n
 			endif
-	
-
-    
 endmenu
 
 menu "Board extended module Drivers"

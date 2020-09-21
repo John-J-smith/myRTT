@@ -216,6 +216,7 @@
           <name>CCDefines</name>
           <state />
           <state>HT6x3x</state>
+          <state>HT6x3x</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -341,16 +342,23 @@
         <option>
           <name>CCIncludePath2</name>
           <state />
+          <state>$PROJ_DIR$\libraries\CMSIS\CM0\DeviceSupport\Inc</state>
+          <state>$PROJ_DIR$\..\..\components\utilities\ymodem</state>
+          <state>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\include</state>
           <state>$PROJ_DIR$\drivers</state>
           <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
-          <state>$PROJ_DIR$\.</state>
+          <state>$PROJ_DIR$\..\..\components\drivers\spi</state>
           <state>$PROJ_DIR$\applications</state>
+          <state>$PROJ_DIR$\..\..\components\utilities\ulog</state>
+          <state>$PROJ_DIR$\..\..\components\drivers\spi\sfud\inc</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\cortex-m0</state>
           <state>$PROJ_DIR$\..\..\components\drivers\include</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\common</state>
+          <state>$PROJ_DIR$\libraries\CMSIS\CM0\CoreSupport</state>
+          <state>$PROJ_DIR$\.</state>
           <state>$PROJ_DIR$\..\..\components\finsh</state>
-          <state>$PROJ_DIR$\drivers\CubeMX_Config\Inc</state>
+          <state>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1241,6 +1249,7 @@
           <name>CCDefines</name>
           <state />
           <state>HT6x3x</state>
+          <state>HT6x3x</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -1366,16 +1375,23 @@
         <option>
           <name>CCIncludePath2</name>
           <state />
+          <state>$PROJ_DIR$\libraries\CMSIS\CM0\DeviceSupport\Inc</state>
+          <state>$PROJ_DIR$\..\..\components\utilities\ymodem</state>
+          <state>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\include</state>
           <state>$PROJ_DIR$\drivers</state>
           <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
-          <state>$PROJ_DIR$\.</state>
+          <state>$PROJ_DIR$\..\..\components\drivers\spi</state>
           <state>$PROJ_DIR$\applications</state>
+          <state>$PROJ_DIR$\..\..\components\utilities\ulog</state>
+          <state>$PROJ_DIR$\..\..\components\drivers\spi\sfud\inc</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\cortex-m0</state>
           <state>$PROJ_DIR$\..\..\components\drivers\include</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\common</state>
+          <state>$PROJ_DIR$\libraries\CMSIS\CM0\CoreSupport</state>
+          <state>$PROJ_DIR$\.</state>
           <state>$PROJ_DIR$\..\..\components\finsh</state>
-          <state>$PROJ_DIR$\drivers\CubeMX_Config\Inc</state>
+          <state>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -2077,10 +2093,34 @@
   <group>
     <name>DeviceDrivers</name>
     <file>
+      <name>$PROJ_DIR$\..\..\components\drivers\i2c\i2c_core.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\components\drivers\i2c\i2c_dev.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\components\drivers\i2c\i2c-bit-ops.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\..\components\drivers\misc\pin.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\components\drivers\serial\serial.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\components\drivers\spi\spi_core.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\components\drivers\spi\spi_dev.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\components\drivers\spi\spi_flash_sfud.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\components\drivers\spi\sfud\src\sfud.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\components\drivers\spi\sfud\src\sfud_sfdp.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\components\drivers\src\completion.c</name>
@@ -2110,10 +2150,19 @@
       <name>$PROJ_DIR$\drivers\board.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\drivers\drv_gpio.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\drivers\drv_uart.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\drivers\drv_gpio.c</name>
+      <name>$PROJ_DIR$\drivers\drv_i2c.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\drivers\drv_spi.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\drivers\drv_eeprom.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\libraries\Startup\IAR\startup_ht6x3x.s</name>
@@ -2129,6 +2178,69 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\components\finsh\msh.c</name>
+    </file>
+  </group>
+  <group>
+    <name>ht6xxx_hal</name>
+    <file>
+      <name>$PROJ_DIR$\libraries\CMSIS\CM0\DeviceSupport\Src\system_ht6xxx.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6x3x_emu.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_aes&amp;rand.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_cmu.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_crc.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_dma.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_ecc.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_exti.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_flash.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_gpio.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_iic.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_lcd.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_pmu.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_reset.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_rtc.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_spi.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_tbs.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_tdes&amp;rand.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_timer.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Src\ht6xxx_uart&amp;7816.c</name>
     </file>
   </group>
   <group>
@@ -2178,5 +2290,20 @@
   </group>
   <group>
     <name>libc</name>
+    <file>
+      <name>$PROJ_DIR$\..\..\components\libc\compilers\common\time.c</name>
+    </file>
+  </group>
+  <group>
+    <name>Utilities</name>
+    <file>
+      <name>$PROJ_DIR$\..\..\components\utilities\ulog\ulog.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\components\utilities\ulog\backend\console_be.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\components\utilities\ymodem\ymodem.c</name>
+    </file>
   </group>
 </project>

@@ -13,7 +13,7 @@
 #include <rtdevice.h>
 #include <board.h>
 
-#ifdef BSP_USING_EEPROM
+#ifdef BSP_USING_FLASH
 
 #include <string.h>
 #include <stdio.h>
@@ -154,4 +154,4 @@ int eeprom_init(void)
 }
 INIT_DEVICE_EXPORT(eeprom_init);
 
-#endif /* #ifdef BSP_USING_EEPROM */
+#endif /* #ifdef BSP_USING_FLASH */
