@@ -225,6 +225,7 @@ uint8_t HD_System_GPIO_DIR_Read(HT_GPIO_TypeDef *GPIOx, uint32_t GPIO_PIN)
 
 void HD_System_GPIO_DIR( HT_GPIO_TypeDef* GPIOx,uint32_t GPIO_PIN,uint8_t PuPd,uint8_t DIR)
 {
+    _OPEN_REG_WRITE;
     if(DIR == OUTPUT)
     {
         GPIOx->PTDIR |= (0x0001<<GPIO_PIN);
@@ -243,18 +244,19 @@ void HD_System_GPIO_DIR( HT_GPIO_TypeDef* GPIOx,uint32_t GPIO_PIN,uint8_t PuPd,u
         GPIOx->PTUP |= (0x0001<<GPIO_PIN);
     }
 
-    // if(PuPd == PUPDR_OD)            /*!< 判断是否使能开漏输出功能  */
-    // {
-    //     GPIOx->PTOD &= ~(0x0001<<GPIO_PIN);         /*!< 配置开漏输出              */
-    // }
-    // else
-    // {
-    //     GPIOx->PTOD |= (0x0001<<GPIO_PIN);            /*!< 配置推挽输出              */
-    // }
+    if(PuPd == PUPDR_OD)            /*!< 判断是否使能开漏输出功能  */
+    {
+        GPIOx->PTOD &= ~(0x0001<<GPIO_PIN);         /*!< 配置开漏输出              */
+    }
+    else
+    {
+        GPIOx->PTOD |= (0x0001<<GPIO_PIN);            /*!< 配置推挽输出              */
+    }
 }
 
 void HD_System_GPIO_AF(HT_GPIO_TypeDef* GPIOx, uint32_t GPIO_PIN, uint8_t ucGPIOAF, uint8_t PuPd)
 {
+    _OPEN_REG_WRITE;
     if(PuPd == PUPDR_UP)
     {
         GPIOx->PTUP &= ~(0x0001<<GPIO_PIN);

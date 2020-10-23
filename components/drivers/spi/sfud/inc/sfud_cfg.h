@@ -40,17 +40,15 @@
 
 #ifdef RT_DEBUG_SFUD
 #define DBG_LVL DBG_LOG
-#define SFUD_DEBUG(fmt, ...)  LOG_D(fmt, ##__VA_ARGS__)//LOG_D("(%s:%ld) "fmt"", __FILE__, __LINE__, ##__VA_ARGS__)
-#define SFUD_INFO(...)        LOG_I(__VA_ARGS__)
+#define SFUD_DEBUG(fmt, ...)  LOG_D("(%s:%ld) "fmt"", __FILE__, __LINE__, ##__VA_ARGS__)
 #else
 #define DBG_LVL DBG_INFO
-#define SFUD_INFO(...)
 #endif /* RT_DEBUG_SFUD */
 
 #define DBG_TAG "SFUD"
 #include <rtdbg.h>
 extern void rt_kprintf(const char *fmt, ...);
-
+#define SFUD_INFO(...)        LOG_I(__VA_ARGS__)
 
 /**
  * Using probe flash JEDEC SFDP parameter.

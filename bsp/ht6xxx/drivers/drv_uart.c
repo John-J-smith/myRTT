@@ -34,6 +34,18 @@
 
 #ifdef BSP_USING_UART
 
+struct ht_uart_t
+{
+    HT_UART_TypeDef        *UARTx;
+    IRQn_Type              *IRQx;
+#if defined(BSP_UART_USING_DMA_TX) || defined(BSP_UART_USING_DMA_RX)
+    HT_DMA_Channel_TypeDef *DMAx;
+    rt_uint32_t             dma_request_id;
+    rt_uint8_t             *dma_tx_buf;
+    int                     dma_bufsz;
+#endif
+};
+
 static void HD_UART_ITConfig(HT_UART_TypeDef *UARTx, uint8_t USART_IT, FunctionalState NewState)
 {
     if(USART_IT == UART_IT_RXNE)
@@ -199,6 +211,7 @@ static rt_err_t uart_configure(struct rt_serial_device *serial, struct serial_co
     return RT_EOK;
 }
 
+char dma_buf[128];
 static rt_err_t uart_control(struct rt_serial_device *serial, int cmd, void *arg)
 {
     HT_UART_TypeDef* uart;
@@ -231,6 +244,34 @@ static rt_err_t uart_control(struct rt_serial_device *serial, int cmd, void *arg
             break;
         /* UART config */
         case RT_DEVICE_CTRL_CONFIG:
+        #if defined(BSP_UART_USING_DMA_TX) || defined(BSP_UART_USING_DMA_RX)
+            if(ctrl_arg == RT_DEVICE_FLAG_DMA_RX)
+            {
+
+            }
+            else if(ctrl_arg == RT_DEVICE_FLAG_DMA_TX)
+            {
+                DMA_InitStruct.DMA_Request = DMA_Request_UART3_TX;
+                DMA_InitStruct.DMA_SourceAddr = (uint32_t)dma_buf;
+                DMA_InitStruct.DMA_DestinationAddr = (uint32_t)&HT_UART3->SBUF;
+                DMA_InitStruct.DMA_TransferNum = 128;
+                DMA_InitStruct.DMA_BulkSize = 1;
+                DMA_InitStruct.DMA_SourceAddrInc = DMA_SourceAddrInc_AutoIncrease;
+                DMA_InitStruct.DMA_DestinationAddrInc = DMA_DestinationAddrInc_NoIncrease;
+                DMA_InitStruct.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+                DMA_InitStruct.DMA_TransferMode = DMA_TransferMode_SingleTransfer;
+                DMA_InitStruct.DMA_CycleMode = DMA_CycleMode_NoCycleTransfer;
+                HT_DMA_Init(HT_DMA_Channel0, &DMA_InitStruct);
+
+                HT_DMA_ClearITPendingBit(DMA_DMAIE_TCIE0);
+                HT_DMA_ITConfig(DMA_DMAIE_TCIE0, ENABLE);
+
+                DMA_Cmd(HT_DMA_Channel0, DISABLE);
+
+                NVIC_SetPriority(DMA_IRQn, 0x00);
+		        NVIC_EnableIRQ(DMA_IRQn);
+            }
+        #endif
             break;
     }
 
@@ -266,11 +307,33 @@ static int uart_getc(struct rt_serial_device *serial)
 	if (HT_UART_ITFlagStatusGet(uart, UART_UARTSTA_RXIF))
     {
 		HT_UART_ClearITPendingBit(uart, UART_UARTSTA_RXIF);
-        ch = (uart->SBUF) & 0xff;
+        ch = (uart->SBUF) & 0Xff;
     }
 
     return ch;
 }
+
+#if defined(BSP_UART_USING_DMA_TX) || defined(BSP_UART_USING_DMA_RX)
+static rt_size_t uart_dma_transmit(struct rt_serial_device *serial, rt_uint8_t *buf, rt_size_t size, int direction)
+{
+    HT_UART_TypeDef* uart;
+    int len = 0;
+
+    RT_ASSERT(serial != RT_NULL);
+    uart = (HT_UART_TypeDef *)serial->parent.user_data;
+    RT_ASSERT(uart != RT_NULL);
+
+    if(direction == RT_SERIAL_DMA_TX)
+    {
+        len = MIN(128, size);
+        rt_memcpy(dma_buf, buf, len);
+        HT_DMA_Channel0->CHNCNT = len;
+        DMA_Cmd(HT_DMA_Channel0, ENABLE);
+    }
+
+    return len;
+}
+#endif
 
 /**
  * Uart common interrupt process. This need add to uart ISR.
@@ -362,6 +425,33 @@ void UART3_IRQHandler(void)
 }
 #endif /* BSP_USING_UART3 */
 
+#if defined(BSP_UART_USING_DMA_TX) || defined(BSP_UART_USING_DMA_RX)
+void DMA_IRQHandler(void)
+{
+    /* enter interrupt */
+    rt_interrupt_enter();
+
+    if(HT_DMA_ITFlagStatusGet(DMA_DMAIF_TCIF0))
+    {
+        HT_DMA_ClearITPendingBit(DMA_DMAIF_TCIF0);
+        rt_hw_serial_isr(&serial3, RT_SERIAL_EVENT_TX_DMADONE);
+    }
+
+    if(HT_DMA_ITFlagStatusGet(DMA_DMAIF_TCIF1))
+    {
+        HT_DMA_ClearITPendingBit(DMA_DMAIF_TCIF1);
+    }
+
+    if(HT_DMA_ITFlagStatusGet(DMA_DMAIF_TCIF2))
+    {
+        HT_DMA_ClearITPendingBit(DMA_DMAIF_TCIF2);
+    }
+
+    /* leave interrupt */
+    rt_interrupt_leave();
+}
+#endif
+
 /**
  * @brief Initialize the UART
  *
@@ -406,7 +496,7 @@ int rt_hw_uart_init(void)
 
     return 0;
 }
-//INIT_BOARD_EXPORT(rt_hw_uart_init);
+INIT_BOARD_EXPORT(rt_hw_uart_init);
 
 #endif /* BSP_USING_UART */
 

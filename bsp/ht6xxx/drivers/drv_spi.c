@@ -26,6 +26,7 @@
 #include <syslog.h>
 #endif /* ULOG_USING_SYSLOG */
 
+
 #ifdef BSP_USING_SPI0
     #define  IO_DF_CLK_PORT                 HT_GPIOC
     #define  IO_DF_CLK_PIN                  Pin_6
@@ -62,8 +63,25 @@ static rt_err_t spi_configure(struct rt_spi_device *device,
 
     SPI_InitStructure.SPI_CSInCtrol = DISABLE;
     SPI_InitStructure.SPI_Baudrate = SPI_BaudRatePrescaler_16;
-    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge; /*!< 动态沿通过后数据被发送            */
-    SPI_InitStructure.SPI_CPOL = SPI_CPOL_high;
+
+	if (configuration->mode & RT_SPI_CPHA)
+    {
+        SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge; /*!< 动态沿通过后数据被发送            */
+    }
+    else
+    {
+        SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge; /*!< 第一个动态沿之前半周期数据被发送  */
+    }
+
+	if (configuration->mode & RT_SPI_CPOL)
+    {
+        SPI_InitStructure.SPI_CPOL = SPI_CPOL_high;
+    }
+    else
+    {
+        SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low;
+    }
+
     SPI_InitStructure.SPI_Mode = SPI_Master;
     //SPI_InitStructure.SPI_CLK = SPI_CLKSEL_PLL44M;
 
@@ -84,7 +102,7 @@ static rt_uint32_t spi_xfer(struct rt_spi_device *device,
     RT_ASSERT(message != RT_NULL);
 
     HT_SPI_TypeDef *SPIx = (HT_SPI_TypeDef *)device->bus->parent.user_data;
-    rt_uint32_t cs = (rt_uint32_t)device->parent.user_data;
+    rt_uint32_t cs = (rt_uint32_t)device->user_data;
 
     recv_buf = message->recv_buf;
     send_buf = message->send_buf;
@@ -99,6 +117,7 @@ static rt_uint32_t spi_xfer(struct rt_spi_device *device,
         for(rt_uint16_t i = 0; i < message->length; i++)
         {
             recv_buf[i] = spi_send_recv(SPIx, send_buf[i]);
+            i++;
         }
     }
     else if (message->send_buf)
@@ -106,6 +125,7 @@ static rt_uint32_t spi_xfer(struct rt_spi_device *device,
         for(rt_uint16_t i = 0; i < message->length; i++)
         {
             spi_send_recv(SPIx, send_buf[i]);
+            i++;
         }
     }
     else
@@ -113,6 +133,7 @@ static rt_uint32_t spi_xfer(struct rt_spi_device *device,
         for(rt_uint16_t i = 0; i < message->length; i++)
         {
             recv_buf[i] = spi_send_recv(SPIx, 0x00);
+            i++;
         }
     }
 
@@ -122,7 +143,7 @@ static rt_uint32_t spi_xfer(struct rt_spi_device *device,
         rt_pin_write(cs, PIN_HIGH);
     }
 
-    return message->length;
+    return 0;
 }
 
 const static struct rt_spi_ops spi_ops =
@@ -159,9 +180,12 @@ rt_err_t spi_bus_attach_device(rt_uint32_t pin,
 int rt_hw_spi_init(void)
 {
     int result = 0;
-    HT_SPI_TypeDef *SPIx;
 
 #ifdef BSP_USING_SPI0
+    /*rt_pin_mode(IO_FLASH_WP, PIN_MODE_OUTPUT);
+    rt_pin_write(IO_FLASH_WP, PIN_HIGH);
+    rt_pin_mode(IO_FLASH_CS, PIN_MODE_OUTPUT);
+    rt_pin_write(IO_FLASH_CS, PIN_HIGH);*/
     rt_pin_mode(IO_SPI0_SCK, PIN_MODE_OUTPUT);
     rt_pin_mode(IO_SPI0_MISO, PIN_MODE_INPUT);
     rt_pin_mode(IO_SPI0_MOSI, PIN_MODE_OUTPUT);
@@ -169,8 +193,7 @@ int rt_hw_spi_init(void)
     HD_System_GPIO_AF(IO_DF_SDI_PORT, IO_DF_SDI_PIN, GPIO_AF_SPI0_SDI, PUPDR_OD);
     HD_System_GPIO_AF(IO_DF_SDO_PORT, IO_DF_SDO_PIN, GPIO_AF_SPI0_SDO, PUPDR_OD);
 
-    SPIx = HT_SPI0;
-    spi0_bus.parent.user_data = SPIx;
+    spi0_bus.parent.user_data = HT_SPI0;
     result = rt_spi_bus_register(&spi0_bus, SPI0_BUS_NAME, &spi_ops);
 #endif
 
