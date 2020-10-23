@@ -28,8 +28,9 @@
 #endif /* ULOG_USING_SYSLOG */
 
 static struct rt_i2c_bus_device *eep_i2c_bus = RT_NULL;
-#define I2C_BUS_NAME    "i2c1"
-#define EEPROM_I2C_ADDR 0x50
+#define I2C_BUS_NAME    	"i2c1"
+#define EEPROM_DEVICE_NAME	"eeprom0"
+#define EEPROM_I2C_ADDR 	0x50
 
 static struct rt_device ee_dev;
 
@@ -48,7 +49,7 @@ static rt_size_t eeprom_write(rt_device_t dev, rt_off_t pos, const void *buf, rt
         buffer[1] = (rt_uint8_t)(addr);
         buffer[2] = *((rt_uint8_t *)buf + i);
         rt_i2c_master_send(eep_i2c_bus, EEPROM_I2C_ADDR, RT_I2C_WR, buffer, 3);
-        rt_thread_mdelay(3);
+        rt_thread_mdelay(6);
         addr++;
     }
 
@@ -72,7 +73,7 @@ static rt_size_t eeprom_read(rt_device_t dev, rt_off_t pos, void *buf, rt_size_t
     return read_size;
 }
 
-static rt_uint32_t eewr(uint8_t argc, char **argv)
+rt_uint32_t eewr(uint8_t argc, char **argv)
 {
     rt_device_t ee = NULL;
     rt_uint32_t addr, size;
@@ -91,7 +92,7 @@ static rt_uint32_t eewr(uint8_t argc, char **argv)
         size = strlen(argv[2]);
     }
 
-    ee = rt_device_find("eeprom");
+    ee = rt_device_find(EEPROM_DEVICE_NAME);
     RT_ASSERT(ee);
     rt_device_open(ee, RT_DEVICE_OFLAG_RDWR);
     rt_device_write(ee, addr, buf, size);
@@ -101,9 +102,9 @@ static rt_uint32_t eewr(uint8_t argc, char **argv)
 
     return size;
 }
-MSH_CMD_EXPORT(eewr, eeprom write usage: eerd [addr] [string]);
+//MSH_CMD_EXPORT(eewr, eeprom write usage: eerd [addr] [string]);
 
-static rt_uint32_t eerd(uint8_t argc, char **argv)
+rt_uint32_t eerd(uint8_t argc, char **argv)
 {
     rt_device_t ee = NULL;
     rt_uint32_t addr, size;
@@ -126,7 +127,7 @@ static rt_uint32_t eerd(uint8_t argc, char **argv)
         }
     }
 
-    ee = rt_device_find("eeprom");
+    ee = rt_device_find(EEPROM_DEVICE_NAME);
     RT_ASSERT(ee);
 
     buf = (rt_uint8_t *)rt_malloc(size);
@@ -139,7 +140,7 @@ static rt_uint32_t eerd(uint8_t argc, char **argv)
 
     return size;
 }
-MSH_CMD_EXPORT(eerd, eeprom read usage: eerd [addr] [size]);
+//MSH_CMD_EXPORT(eerd, eeprom read usage: eerd [addr] [size]);
 
 int eeprom_init(void)
 {
@@ -150,7 +151,7 @@ int eeprom_init(void)
 	ee_dev.write	= eeprom_write;
 	ee_dev.type 	= RT_Device_Class_Unknown;
 
-	return rt_device_register(&ee_dev, "eeprom", RT_DEVICE_FLAG_RDWR);
+	return rt_device_register(&ee_dev, EEPROM_DEVICE_NAME, RT_DEVICE_FLAG_RDWR);
 }
 INIT_DEVICE_EXPORT(eeprom_init);
 

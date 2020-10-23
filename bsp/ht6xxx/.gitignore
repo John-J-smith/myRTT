@@ -60,6 +60,8 @@ cconfig.h
 *.ilk
 *.map
 *.exp
+*.linf
+*.pbd
 
 # Precompiled Headers
 *.gch
