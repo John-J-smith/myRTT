@@ -25,13 +25,9 @@
 
 void server_thread(void *parameter)
 {
-    struct sockaddr_in client_addr;
-    struct sockaddr_in server_addr;
-    int sockfd = -1;
-
     while(1)
     {
-        HT_FreeDog();
+        HD_clrWDT();
         rt_thread_mdelay(500);
     }
 }
@@ -106,7 +102,7 @@ int main(void)
     rt_uint32_t reboot_cnt = 0, len = 0;
     char reboot_cnt_buf[11];
 
-    HT_FreeDog();
+    HD_clrWDT();
     fal_init();
     easyflash_init();
 
@@ -120,12 +116,15 @@ int main(void)
                                     led_thread_entry, RT_NULL,
                                     256, 5, 1);
 
+    if (led_thread_ptr != RT_NULL) rt_thread_startup(led_thread_ptr);
+    
+    
     server_thread_ptr = rt_thread_create("server",
                                     server_thread, RT_NULL,
-                                    2048, 5, 1);
+                                    256, 5, 1);
 
-    if (led_thread_ptr != RT_NULL) rt_thread_startup(led_thread_ptr);
     if (server_thread_ptr != RT_NULL) rt_thread_startup(server_thread_ptr);
+
 
     return RT_EOK;
 }

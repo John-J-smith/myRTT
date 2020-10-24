@@ -2088,6 +2088,9 @@
         </file>
         <file>
             <name>$PROJ_DIR$\applications\ymodem_upgrade.c</name>
+            <excluded>
+                <configuration>rt-thread</configuration>
+            </excluded>
         </file>
     </group>
     <group>
@@ -2107,6 +2110,9 @@
     </group>
     <group>
         <name>at_device</name>
+        <excluded>
+            <configuration>rt-thread</configuration>
+        </excluded>
         <file>
             <name>$PROJ_DIR$\packages\at_device-latest\src\at_device.c</name>
         </file>
@@ -2115,9 +2121,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\packages\at_device-latest\samples\at_sample_n58.c</name>
-            <excluded>
-                <configuration>rt-thread</configuration>
-            </excluded>
         </file>
         <file>
             <name>$PROJ_DIR$\packages\at_device-latest\class\n58\at_socket_n58.c</name>
@@ -2169,9 +2172,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\components\drivers\i2c\i2c_dev.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\components\drivers\mtd\mtd_nand.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\components\drivers\misc\pin.c</name>
@@ -2232,6 +2232,9 @@
         </file>
         <file>
             <name>$PROJ_DIR$\drivers\drv_uart.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\drivers\HD_System.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\libraries\Startup\IAR\startup_ht6x3x.s</name>
@@ -2416,6 +2419,9 @@
     </group>
     <group>
         <name>netdev</name>
+        <excluded>
+            <configuration>rt-thread</configuration>
+        </excluded>
         <file>
             <name>$PROJ_DIR$\..\..\components\net\netdev\src\netdev.c</name>
         </file>
@@ -2425,6 +2431,9 @@
     </group>
     <group>
         <name>SAL</name>
+        <excluded>
+            <configuration>rt-thread</configuration>
+        </excluded>
         <file>
             <name>$PROJ_DIR$\..\..\components\net\sal_socket\impl\af_inet_at.c</name>
         </file>

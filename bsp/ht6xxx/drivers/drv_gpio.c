@@ -13,6 +13,7 @@
 #include <rthw.h>
 #include <rtdevice.h>
 #include "drv_gpio.h"
+#include "HD_System.h"
 
 #ifdef BSP_USING_GPIO
 

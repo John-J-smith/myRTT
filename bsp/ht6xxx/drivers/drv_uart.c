@@ -26,8 +26,8 @@
 #include <rtdevice.h>
 #include "ht6xxx_uart&7816.h"
 #include "ht6xxx_dma.h"
-#include "board.h"
 #include "drv_gpio.h"
+#include "HD_System.h"
 
 #define UART_IT_RXNE  (1)
 #define UART_IT_TXNE  (2)
@@ -165,6 +165,34 @@ static rt_err_t uart_configure(struct rt_serial_device *serial, struct serial_co
     RT_ASSERT(uart != RT_NULL);
 
     _OPEN_REG_WRITE;
+
+#if defined(BSP_USING_UART0)
+    if(uart == HT_UART0)
+	{
+		HT_CMU->CLKCTRL1 |= UART0_EN;
+	}
+#endif /* BSP_USING_UART0 */
+
+#if defined(BSP_USING_UART1)
+    if(uart == HT_UART1)
+	{
+        HT_CMU->CLKCTRL1 |= UART1_EN;
+    }
+#endif /* BSP_USING_UART1 */
+
+#if defined(BSP_USING_UART2)
+    if(uart == HT_UART2)
+	{
+        HT_CMU->CLKCTRL1 |= UART2_EN;
+    }
+#endif /* BSP_USING_UART2 */
+
+#if defined(BSP_USING_UART3)
+    if(uart == HT_UART3)
+    {
+        HT_CMU->CLKCTRL1 |= UART3_EN;
+    }
+#endif /* BSP_USING_UART3 */
 
 	/* baudrate */
 	uart->SREL = HD_UART_BaudConfig(cfg->baud_rate);

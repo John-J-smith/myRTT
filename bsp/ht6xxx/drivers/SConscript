@@ -9,6 +9,8 @@ src = Split('''
 board.c
 ''')
     
+src = src + ['HD_System.c']
+
 # add gpio driver code
 if GetDepend('BSP_USING_GPIO'):
     src = src + ['drv_gpio.c']

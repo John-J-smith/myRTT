@@ -13,8 +13,10 @@
 #include <rthw.h>
 #include <rtthread.h>
 #include <rtdevice.h>
+#include "HD_System.h"
 #include "drv_gpio.h"
 #include "drv_i2c.h"
+   
 
 //#define DEBUG
 
