@@ -2415,6 +2415,9 @@
             <name>$PROJ_DIR$\drivers\drv_uart.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\drivers\HD_System.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\libraries\Startup\IAR\startup_ht6x3x.s</name>
         </file>
     </group>

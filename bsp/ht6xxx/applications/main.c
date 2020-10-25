@@ -23,12 +23,9 @@
 
 void thread1_entry(void* parameter)
 {
-    int count1 = 0;
-
-    while (1)
+    while(1)
     {
-        //LOG_I("Thread1 count:%d", ++count1);
-        HT_FreeDog();
+        HD_clrWDT();
         rt_thread_mdelay(500);
     }
 }
@@ -91,34 +88,33 @@ void thread3_entry(void* parameter)
 
 int main(void)
 {
-    rt_thread_t thread1_ptr, thread2_ptr, thread3_ptr;
+    rt_thread_t led_thread_ptr, server_thread_ptr;
+    rt_uint32_t reboot_cnt = 0, len = 0;
+    char reboot_cnt_buf[11];
 
-    /* set LED0 pin mode to output
-    rt_pin_mode(LED0_PIN, PIN_MODE_OUTPUT);
+    HD_clrWDT();
+    fal_init();
+    easyflash_init();
 
-    while (count++)
-    {
-        rt_pin_write(LED0_PIN, PIN_HIGH);
-        rt_thread_mdelay(500);
-        rt_pin_write(LED0_PIN, PIN_LOW);
-        rt_thread_mdelay(500);
-    }*/
+    ef_get_env_blob("reboot_cnt", reboot_cnt_buf, sizeof(reboot_cnt_buf), &len);
+    reboot_cnt = atoi(reboot_cnt_buf);
+    reboot_cnt++;
+    rt_sprintf(reboot_cnt_buf, "%d", reboot_cnt);
+    ef_set_env("reboot_cnt", reboot_cnt_buf);
 
-    thread1_ptr = rt_thread_create("thread1",
-                                    thread1_entry, RT_NULL,
-                                    2048, 5, 1);
+    led_thread_ptr = rt_thread_create("led",
+                                    led_thread_entry, RT_NULL,
+                                    256, 5, 1);
 
-    thread2_ptr = rt_thread_create("thread2",
-                                    thread2_entry, RT_NULL,
-                                    512, 5, 1);
+    if (led_thread_ptr != RT_NULL) rt_thread_startup(led_thread_ptr);
 
-    thread3_ptr = rt_thread_create("thread3",
-                                    thread3_entry, RT_NULL,
-                                    512, 5, 1);
 
-    if (thread1_ptr != RT_NULL) rt_thread_startup(thread1_ptr);
-    if (thread2_ptr != RT_NULL) rt_thread_startup(thread2_ptr);
-    if (thread3_ptr != RT_NULL) rt_thread_startup(thread3_ptr);
+    server_thread_ptr = rt_thread_create("server",
+                                    server_thread, RT_NULL,
+                                    256, 5, 1);
+
+    if (server_thread_ptr != RT_NULL) rt_thread_startup(server_thread_ptr);
+
 
     return RT_EOK;
 }

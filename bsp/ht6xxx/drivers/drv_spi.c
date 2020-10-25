@@ -12,7 +12,8 @@
 #include <board.h>
 #include <rtthread.h>
 #include <rtdevice.h>
-
+#include "HD_System.h"
+   
 #ifdef RT_USING_SPI
 
 #include "drv_gpio.h"
