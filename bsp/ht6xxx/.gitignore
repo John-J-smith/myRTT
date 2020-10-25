@@ -52,6 +52,7 @@ cconfig.h
 *.bin
 *.browse
 *.pbd
+*.pbd.tmp
 
 # iar setting
 *.wsdt

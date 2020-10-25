@@ -654,7 +654,7 @@
                 <option>
                     <name>OOCOutputFormat</name>
                     <version>3</version>
-                    <state>3</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OCOutputOverride</name>
@@ -662,7 +662,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state>../../../rtthread.bin</state>
+                    <state>project.hex</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -2088,9 +2088,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\applications\ymodem_upgrade.c</name>
-            <excluded>
-                <configuration>rt-thread</configuration>
-            </excluded>
         </file>
     </group>
     <group>
@@ -2419,9 +2416,6 @@
     </group>
     <group>
         <name>netdev</name>
-        <excluded>
-            <configuration>rt-thread</configuration>
-        </excluded>
         <file>
             <name>$PROJ_DIR$\..\..\components\net\netdev\src\netdev.c</name>
         </file>
@@ -2431,9 +2425,6 @@
     </group>
     <group>
         <name>SAL</name>
-        <excluded>
-            <configuration>rt-thread</configuration>
-        </excluded>
         <file>
             <name>$PROJ_DIR$\..\..\components\net\sal_socket\impl\af_inet_at.c</name>
         </file>

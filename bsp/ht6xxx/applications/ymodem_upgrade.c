@@ -49,6 +49,8 @@ static enum rym_code _rym_recv_begin(
     if (cctx->flen == 0)
         cctx->flen = -1;
 
+    fal_partition_erase_all(cctx->part);
+
     return RYM_CODE_ACK;
 }
 
@@ -60,14 +62,10 @@ static enum rym_code _rym_recv_data(
     struct custom_ctx *cctx = (struct custom_ctx *)ctx;
 
     RT_ASSERT(cctx->part != RT_NULL);
-    if (cctx->flen == -1)
-    {
-        fal_partition_write(cctx->part, cctx->off, buf, len);
-    }
-    else
+    if (cctx->flen > 0)
     {
         int wlen = (len > cctx->flen - cctx->off) ? cctx->flen - cctx->off : len;
-        fal_partition_write(cctx->part, cctx->off, buf, len);
+        fal_partition_write(cctx->part, cctx->off, buf, wlen);
         cctx->off += wlen;
     }
 
@@ -110,9 +108,9 @@ static rt_err_t rym_download_file(rt_device_t idev)
         rt_sprintf(buf, "%d", ctx->flen);
         ef_set_env("iap_copy_app_size", buf);
 
-        rt_enter_critical();
-        while(1); /* wait for watch dog reset*/
-        rt_exit_critical();
+        //rt_enter_critical();
+        //while(1); /* wait for watch dog reset*/
+        //rt_exit_critical();
     }
 
     rt_free(ctx);

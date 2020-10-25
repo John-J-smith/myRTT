@@ -65,10 +65,6 @@ static void clock_init(void)
     U8 ucCnt;
     U8 ucPowerStable;
 
-    __disable_irq();
-
-    HD_clrWDT();
-    Delay_ms(100);
     HD_clrWDT();
     HD_System_RCC_Init();
     g_ulMCLK = HT_CMU_SysClkGet();
@@ -94,8 +90,6 @@ static void clock_init(void)
     }
     SwitchTo_Fpll(SPD_MCU);
     g_ulMCLK = HT_CMU_SysClkGet();
-
-    __enable_irq();
 }
 
 void rt_hw_board_init(void)
@@ -103,6 +97,7 @@ void rt_hw_board_init(void)
 	clock_init();
 
     SysTick_Config(HT_CMU_SysClkGet()/1000);
+    NVIC_SetPriority(SysTick_IRQn, 0x03);
 
 #ifdef RT_USING_HEAP
     /* initialize system heap */
