@@ -1,17 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <fileVersion>3</fileVersion>
-  <configuration>
-    <name>rt-thread</name>
-    <toolchain>
-      <name>ARM</name>
-    </toolchain>
-    <debug>1</debug>
-    <settings>
-      <name>General</name>
-      <archiveVersion>3</archiveVersion>
-      <data>
-        <version>29</version>
-        <wantNonLocal>1</wantNonLocal>
+    <fileVersion>3</fileVersion>
+    <configuration>
+        <name>rt-thread</name>
+        <toolchain>
+            <name>ARM</name>
+        </toolchain>
         <debug>1</debug>
         <settings>
             <name>General</name>

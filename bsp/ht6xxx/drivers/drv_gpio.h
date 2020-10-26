@@ -87,23 +87,18 @@ void 	HD_System_GPIO_AF(HT_GPIO_TypeDef* GPIOx, uint32_t GPIO_PIN, uint8_t ucGPI
 // spi
 #define IO_FLASH_WP     GET_PIN(A, 5)
 #define IO_FLASH_CS     GET_PIN(C, 7)
-
 #define IO_SPI0_SCK     GET_PIN(C, 6)
 #define IO_SPI0_MISO    GET_PIN(C, 5)
 #define IO_SPI0_MOSI    GET_PIN(C, 4)
+
 // i2c
 #define IO_EE_WP        GET_PIN(E, 3)
-#define PIN_I2C1_SCL    GET_PIN(B, 8)      // PB8 :  I2C1_SCL     --> EXTERNAL MODULE
-#define PIN_I2C1_SDA    GET_PIN(B, 9)      // PB9 :  I2C1_SDA     --> EXTERNAL MODULE
+#define PIN_I2C1_SCL    GET_PIN(B, 8)
+#define PIN_I2C1_SDA    GET_PIN(B, 9)
+
 // io
-#define PIN_IO_PD12     GET_PIN(D, 12)     // PD12:  IO_PD12      --> EXTERNAL MODULE
-#define PIN_IO_PD13     GET_PIN(D, 13)     // PD13:  IO_PD13      --> EXTERNAL MODULE
-#define PIN_IO_PD14     GET_PIN(D, 14)     // PD14:  IO_PD14      --> EXTERNAL MODULE
-#define PIN_IO_PD15     GET_PIN(D, 15)     // PD15:  IO_PD15      --> EXTERNAL MODULE
-#define PIN_IO_PA8      GET_PIN(A, 8)      // PA8 :  IO_PA8       --> EXTERNAL MODULE
-#define PIN_IO_PD3      GET_PIN(D, 3)      // PD3 :  IO_PD3       --> EXTERNAL MODULE
-#define PIN_IO_PE0      GET_PIN(E, 0)      // PE0 :  IO_PE0       --> EXTERNAL MODULE
-#define PIN_IO_PE1      GET_PIN(E, 1)      // PE1 :  IO_PE1       --> EXTERNAL MODULE
+#define IO_MODEM_PWRKEY GET_PIN(C, 9)
+#define IO_MODEM_RESET  GET_PIN(C, 10)
 
 #endif /* __GPIO_H__ */
 

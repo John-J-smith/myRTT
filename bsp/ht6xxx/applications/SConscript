@@ -3,7 +3,11 @@ Import('rtconfig')
 from building import *
 
 cwd = GetCurrentDir()
-src = Glob('*.c')
+
+src = Glob('main.c')
+if GetDepend('RT_USING_RYM'):
+    src = src + Glob('ymodem_upgrade.c')
+    
 CPPPATH = [cwd, str(Dir('#'))]
 
 group = DefineGroup('Applications', src, depend = [''], CPPPATH = CPPPATH)
