@@ -234,7 +234,7 @@ static void client_cli_parser(at_client_t  client)
         rt_sem_init(&client_rx_notice, "cli_r", 0, RT_IPC_FLAG_FIFO);
         client_rx_fifo = rt_ringbuffer_create(AT_CLI_FIFO_SIZE);
 
-        at_client = rt_thread_create("at_cli", at_client_entry, RT_NULL, 512, 5, 8);
+        at_client = rt_thread_create("at_cli", at_client_entry, RT_NULL, 512, 8, 8);
         if (client_rx_fifo && at_client)
         {
             rt_kprintf("======== Welcome to using RT-Thread AT command client cli ========\n");

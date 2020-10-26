@@ -11,9 +11,6 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <board.h>
-#include "fal.h"
-#include "easyflash.h"
-#include <sal_socket.h>
 
 #ifndef ULOG_USING_SYSLOG
 #define LOG_TAG              "main"
@@ -23,7 +20,8 @@
 #include <syslog.h>
 #endif /* ULOG_USING_SYSLOG */
 
-void server_thread(void *parameter)
+
+void thread1_entry(void* parameter)
 {
     while(1)
     {
@@ -32,10 +30,21 @@ void server_thread(void *parameter)
     }
 }
 
-void led_thread_entry(void* parameter)
+void thread2_entry(void* parameter)
 {
-#define interval 250
+    rt_device_t uart3;
 
+    uart3 = rt_device_find("uart3");
+    rt_device_open(uart3, RT_DEVICE_OFLAG_RDWR | RT_DEVICE_FLAG_INT_RX);
+    while (1)
+    {
+
+        rt_thread_mdelay(100);
+    }
+}
+
+void thread3_entry(void* parameter)
+{
     rt_pin_mode(IO_RUN_LED, PIN_MODE_OUTPUT);
     rt_pin_mode(IO_TX_LED, PIN_MODE_OUTPUT);
     rt_pin_mode(IO_RX_LED, PIN_MODE_OUTPUT);
@@ -47,52 +56,33 @@ void led_thread_entry(void* parameter)
     rt_pin_mode(IO_SIG_3_LED, PIN_MODE_OUTPUT);
     rt_pin_mode(IO_SIG_4_LED, PIN_MODE_OUTPUT);
     rt_pin_mode(IO_485_LED, PIN_MODE_OUTPUT);
-
     while (1)
     {
-        rt_pin_write(IO_RUN_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
         rt_pin_write(IO_RUN_LED, PIN_HIGH);
-
-        rt_pin_write(IO_TX_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
         rt_pin_write(IO_TX_LED, PIN_HIGH);
-
-        rt_pin_write(IO_RX_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
         rt_pin_write(IO_RX_LED, PIN_HIGH);
-
-        rt_pin_write(IO_485_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
-        rt_pin_write(IO_485_LED, PIN_HIGH);
-
-        rt_pin_write(IO_RELAY_A_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
         rt_pin_write(IO_RELAY_A_LED, PIN_HIGH);
-
-        rt_pin_write(IO_RELAY_B_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
         rt_pin_write(IO_RELAY_B_LED, PIN_HIGH);
-
-        rt_pin_write(IO_RELAY_C_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
         rt_pin_write(IO_RELAY_C_LED, PIN_HIGH);
-
-        rt_pin_write(IO_SIG_1_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
         rt_pin_write(IO_SIG_1_LED, PIN_HIGH);
-
-        rt_pin_write(IO_SIG_2_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
         rt_pin_write(IO_SIG_2_LED, PIN_HIGH);
-
-        rt_pin_write(IO_SIG_3_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
         rt_pin_write(IO_SIG_3_LED, PIN_HIGH);
-
-        rt_pin_write(IO_SIG_4_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
         rt_pin_write(IO_SIG_4_LED, PIN_HIGH);
+        rt_pin_write(IO_485_LED, PIN_HIGH);
+        rt_thread_mdelay(500);
+
+        rt_pin_write(IO_RUN_LED, PIN_LOW);
+        rt_pin_write(IO_TX_LED, PIN_LOW);
+        rt_pin_write(IO_RX_LED, PIN_LOW);
+        rt_pin_write(IO_RELAY_A_LED, PIN_LOW);
+        rt_pin_write(IO_RELAY_B_LED, PIN_LOW);
+        rt_pin_write(IO_RELAY_C_LED, PIN_LOW);
+        rt_pin_write(IO_SIG_1_LED, PIN_LOW);
+        rt_pin_write(IO_SIG_2_LED, PIN_LOW);
+        rt_pin_write(IO_SIG_3_LED, PIN_LOW);
+        rt_pin_write(IO_SIG_4_LED, PIN_LOW);
+        rt_pin_write(IO_485_LED, PIN_LOW);
+        rt_thread_mdelay(500);
     }
 }
 
@@ -117,8 +107,8 @@ int main(void)
                                     256, 5, 1);
 
     if (led_thread_ptr != RT_NULL) rt_thread_startup(led_thread_ptr);
-    
-    
+
+
     server_thread_ptr = rt_thread_create("server",
                                     server_thread, RT_NULL,
                                     256, 5, 1);

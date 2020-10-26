@@ -2318,51 +2318,6 @@
         <file>
             <name>$PROJ_DIR$\applications\main.c</name>
         </file>
-        <file>
-            <name>$PROJ_DIR$\applications\ymodem_upgrade.c</name>
-        </file>
-    </group>
-    <group>
-        <name>AT</name>
-        <file>
-            <name>$PROJ_DIR$\..\..\components\net\at\src\at_cli.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\components\net\at\src\at_client.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\components\net\at\at_socket\at_socket.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\components\net\at\src\at_utils.c</name>
-        </file>
-    </group>
-    <group>
-        <name>at_device</name>
-        <file>
-            <name>$PROJ_DIR$\packages\at_device-latest\src\at_device.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\at_device-latest\class\n58\at_device_n58.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\at_device-latest\samples\at_sample_n58.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\at_device-latest\class\n58\at_socket_n58.c</name>
-        </file>
-    </group>
-    <group>
-        <name>cm_backtrace</name>
-        <file>
-            <name>$PROJ_DIR$\packages\CmBacktrace-latest\cm_backtrace.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\CmBacktrace-latest\cmb_flash_log.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\CmBacktrace-latest\cmb_port.c</name>
-        </file>
     </group>
     <group>
         <name>cpu</name>
@@ -2464,60 +2419,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\libraries\Startup\IAR\startup_ht6x3x.s</name>
-        </file>
-    </group>
-    <group>
-        <name>EasyFlash</name>
-        <file>
-            <name>$PROJ_DIR$\packages\EasyFlash-master\src\easyflash.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_cmd.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_env.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_env_legacy.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_env_legacy_wl.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\EasyFlash-master\ports\ef_fal_port.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_iap.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_log.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_utils.c</name>
-        </file>
-    </group>
-    <group>
-        <name>fal</name>
-        <file>
-            <name>$PROJ_DIR$\packages\fal-latest\src\fal.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\fal-latest\porting\fal_eeprom_port.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\fal-latest\src\fal_flash.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\fal-latest\porting\fal_flash_ht6xxx_port.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\fal-latest\porting\fal_flash_sfud_port.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\fal-latest\src\fal_partition.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\packages\fal-latest\src\fal_rtt.c</name>
         </file>
     </group>
     <group>
@@ -2642,26 +2543,8 @@
     </group>
     <group>
         <name>libc</name>
-    </group>
-    <group>
-        <name>netdev</name>
         <file>
-            <name>$PROJ_DIR$\..\..\components\net\netdev\src\netdev.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\components\net\netdev\src\netdev_ipaddr.c</name>
-        </file>
-    </group>
-    <group>
-        <name>SAL</name>
-        <file>
-            <name>$PROJ_DIR$\..\..\components\net\sal_socket\impl\af_inet_at.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\components\net\sal_socket\socket\net_netdb.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\components\net\sal_socket\src\sal_socket.c</name>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\common\time.c</name>
         </file>
     </group>
     <group>

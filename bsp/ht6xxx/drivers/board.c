@@ -104,13 +104,11 @@ void rt_hw_board_init(void)
     rt_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
 #endif /* RT_USING_HEAP */
 
-	rt_hw_uart_init();
+#ifdef RT_USING_COMPONENTS_INIT
+    rt_components_board_init();
+#endif /* RT_USING_COMPONENTS_INIT */
 
 #ifdef RT_USING_CONSOLE
     rt_console_set_device(RT_CONSOLE_DEVICE_NAME);
 #endif /* RT_USING_CONSOLE */
-
-#ifdef RT_USING_COMPONENTS_INIT
-    rt_components_board_init();
-#endif /* RT_USING_COMPONENTS_INIT */
 }

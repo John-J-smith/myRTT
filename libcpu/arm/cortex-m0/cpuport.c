@@ -45,9 +45,6 @@ struct stack_frame
 /* flag in interrupt handling */
 rt_uint32_t rt_interrupt_from_thread, rt_interrupt_to_thread;
 rt_uint32_t rt_thread_switch_interrupt_flag;
-/* exception hook */
-static rt_err_t (*rt_exception_hook)(void *context) = RT_NULL;
-
 
 /**
  * This function will initialize thread stack
@@ -93,16 +90,6 @@ rt_uint8_t *rt_hw_stack_init(void       *tentry,
     return stk;
 }
 
-/**
- * This function set the hook, which is invoked on fault exception handling.
- *
- * @param exception_handle the exception handling hook function.
- */
-void rt_hw_exception_install(rt_err_t (*exception_handle)(void* context))
-{
-    rt_exception_hook = exception_handle;
-}
-
 extern long list_thread(void);
 extern rt_thread_t rt_current_thread;
 /**
@@ -110,15 +97,6 @@ extern rt_thread_t rt_current_thread;
  */
 void rt_hw_hard_fault_exception(struct exception_stack_frame *contex)
 {
-    if (rt_exception_hook != RT_NULL)
-    {
-        rt_err_t result;
-
-        result = rt_exception_hook(contex);
-        if (result == RT_EOK)
-            return;
-    }
-    
     rt_kprintf("psr: 0x%08x\n", contex->psr);
     rt_kprintf(" pc: 0x%08x\n", contex->pc);
     rt_kprintf(" lr: 0x%08x\n", contex->lr);
