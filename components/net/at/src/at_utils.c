@@ -24,6 +24,20 @@ static rt_size_t last_cmd_len = 0;
  */
 void at_print_raw_cmd(const char *name, const char *buf, rt_size_t size)
 {
+    if(0 == rt_strcmp(name, "sendline"))
+    {
+        rt_kprintf("\r\n[D/AT] %s: ", name);
+        rt_kprintf("%s\r\n", buf);
+    }
+    else
+    {
+        rt_kprintf("[D/AT] %s: ", name);
+        rt_kprintf("%s", buf);
+    }
+}
+
+void _at_print_raw_cmd(const char *name, const char *buf, rt_size_t size)
+{
 #define __is_print(ch)       ((unsigned int)((ch) - ' ') < 127u - ' ')
 #define WIDTH_SIZE           32
 

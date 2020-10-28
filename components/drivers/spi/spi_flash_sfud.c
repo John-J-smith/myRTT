@@ -508,7 +508,7 @@ __error:
     return RT_NULL;
 }
 
-#if defined(RT_USING_FINSH) && defined(FINSH_USING_MSH)
+#if 0//defined(RT_USING_FINSH) && defined(FINSH_USING_MSH)
 
 #include <finsh.h>
 

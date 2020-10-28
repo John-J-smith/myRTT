@@ -211,6 +211,9 @@
                 </option>
                 <option>
                     <name>CCDefines</name>
+                    <state>RT_USING_DLIBC</state>
+                    <state>_DLIB_FILE_DESCRIPTOR</state>
+                    <state>_DLIB_THREAD_SUPPORT</state>
                     <state>HT6x3x</state>
                     <state>HT6x3x</state>
                 </option>
@@ -339,18 +342,21 @@
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\..\components\net\sal_socket\include\socket</state>
                     <state>$PROJ_DIR$\packages\fal-latest\porting</state>
-                    <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
+                    <state>$PROJ_DIR$\..\..\components\libc\compilers\dlib</state>
                     <state>$PROJ_DIR$\..\..\components\net\sal_socket\include</state>
                     <state>$PROJ_DIR$\..\..\include</state>
                     <state>$PROJ_DIR$\..\..\libcpu\arm\common</state>
                     <state>$PROJ_DIR$\..\..\components\drivers\include</state>
+                    <state>$PROJ_DIR$\..\..\components\dfs\filesystems\devfs</state>
                     <state>$PROJ_DIR$\..\..\components\net\at\at_socket</state>
-                    <state>$PROJ_DIR$\..\..\components\net\at\include</state>
+                    <state>$PROJ_DIR$\packages\EasyFlash-master\inc</state>
                     <state>$PROJ_DIR$\packages\at_device-latest\inc</state>
                     <state>$PROJ_DIR$\packages\CmBacktrace-latest</state>
+                    <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
                     <state>$PROJ_DIR$\.</state>
                     <state>$PROJ_DIR$\..\..\components\utilities\ulog</state>
                     <state>$PROJ_DIR$\..\..\components\drivers\spi\sfud\inc</state>
+                    <state>$PROJ_DIR$\..\..\components\dfs\include</state>
                     <state>$PROJ_DIR$\..\..\libcpu\arm\cortex-m0</state>
                     <state>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Inc</state>
                     <state>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver</state>
@@ -363,7 +369,8 @@
                     <state>$PROJ_DIR$\..\..\components\finsh</state>
                     <state>$PROJ_DIR$\libraries\CMSIS\CM0\CoreSupport</state>
                     <state>$PROJ_DIR$\..\..\components\utilities\ymodem</state>
-                    <state>$PROJ_DIR$\packages\EasyFlash-master\inc</state>
+                    <state>$PROJ_DIR$\..\..\components\dfs\filesystems\elmfat</state>
+                    <state>$PROJ_DIR$\..\..\components\net\at\include</state>
                     <state>$PROJ_DIR$\packages\fal-latest\inc</state>
                     <state>$PROJ_DIR$\packages\at_device-latest\class\n58</state>
                     <state>$PROJ_DIR$\drivers</state>
@@ -654,7 +661,7 @@
                 <option>
                     <name>OOCOutputFormat</name>
                     <version>3</version>
-                    <state>1</state>
+                    <state>3</state>
                 </option>
                 <option>
                     <name>OCOutputOverride</name>
@@ -662,7 +669,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state>project.hex</state>
+                    <state>../../../rtthread.bin</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -1251,6 +1258,9 @@
                 </option>
                 <option>
                     <name>CCDefines</name>
+                    <state>RT_USING_DLIBC</state>
+                    <state>_DLIB_FILE_DESCRIPTOR</state>
+                    <state>_DLIB_THREAD_SUPPORT</state>
                     <state>HT6x3x</state>
                     <state>HT6x3x</state>
                 </option>
@@ -1379,18 +1389,21 @@
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\..\components\net\sal_socket\include\socket</state>
                     <state>$PROJ_DIR$\packages\fal-latest\porting</state>
-                    <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
+                    <state>$PROJ_DIR$\..\..\components\libc\compilers\dlib</state>
                     <state>$PROJ_DIR$\..\..\components\net\sal_socket\include</state>
                     <state>$PROJ_DIR$\..\..\include</state>
                     <state>$PROJ_DIR$\..\..\libcpu\arm\common</state>
                     <state>$PROJ_DIR$\..\..\components\drivers\include</state>
+                    <state>$PROJ_DIR$\..\..\components\dfs\filesystems\devfs</state>
                     <state>$PROJ_DIR$\..\..\components\net\at\at_socket</state>
-                    <state>$PROJ_DIR$\..\..\components\net\at\include</state>
+                    <state>$PROJ_DIR$\packages\EasyFlash-master\inc</state>
                     <state>$PROJ_DIR$\packages\at_device-latest\inc</state>
                     <state>$PROJ_DIR$\packages\CmBacktrace-latest</state>
+                    <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
                     <state>$PROJ_DIR$\.</state>
                     <state>$PROJ_DIR$\..\..\components\utilities\ulog</state>
                     <state>$PROJ_DIR$\..\..\components\drivers\spi\sfud\inc</state>
+                    <state>$PROJ_DIR$\..\..\components\dfs\include</state>
                     <state>$PROJ_DIR$\..\..\libcpu\arm\cortex-m0</state>
                     <state>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver\Inc</state>
                     <state>$PROJ_DIR$\libraries\HT60xx_StdPeriph_Driver</state>
@@ -1403,7 +1416,8 @@
                     <state>$PROJ_DIR$\..\..\components\finsh</state>
                     <state>$PROJ_DIR$\libraries\CMSIS\CM0\CoreSupport</state>
                     <state>$PROJ_DIR$\..\..\components\utilities\ymodem</state>
-                    <state>$PROJ_DIR$\packages\EasyFlash-master\inc</state>
+                    <state>$PROJ_DIR$\..\..\components\dfs\filesystems\elmfat</state>
+                    <state>$PROJ_DIR$\..\..\components\net\at\include</state>
                     <state>$PROJ_DIR$\packages\fal-latest\inc</state>
                     <state>$PROJ_DIR$\packages\at_device-latest\class\n58</state>
                     <state>$PROJ_DIR$\drivers</state>
@@ -2084,6 +2098,9 @@
     <group>
         <name>Applications</name>
         <file>
+            <name>$PROJ_DIR$\applications\fal_fs_part_dev.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\applications\main.c</name>
         </file>
         <file>
@@ -2107,9 +2124,6 @@
     </group>
     <group>
         <name>at_device</name>
-        <excluded>
-            <configuration>rt-thread</configuration>
-        </excluded>
         <file>
             <name>$PROJ_DIR$\packages\at_device-latest\src\at_device.c</name>
         </file>
@@ -2171,6 +2185,9 @@
             <name>$PROJ_DIR$\..\..\components\drivers\i2c\i2c_dev.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\components\drivers\mtd\mtd_nand.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\components\drivers\misc\pin.c</name>
         </file>
         <file>
@@ -2205,6 +2222,42 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\components\drivers\src\workqueue.c</name>
+        </file>
+    </group>
+    <group>
+        <name>dlib</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\environ.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\libc.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\rmtx.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\stdio.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_close.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_lseek.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_mem.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_open.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_read.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_remove.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_write.c</name>
         </file>
     </group>
     <group>
@@ -2292,12 +2345,48 @@
         </file>
     </group>
     <group>
+        <name>Filesystem</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\filesystems\elmfat\option\ccsbcs.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\filesystems\devfs\devfs.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\dfs.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\filesystems\elmfat\dfs_elm.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\dfs_file.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\dfs_fs.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\dfs_posix.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\filesystems\elmfat\ff.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\poll.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\select.c</name>
+        </file>
+    </group>
+    <group>
         <name>finsh</name>
         <file>
             <name>$PROJ_DIR$\..\..\components\finsh\cmd.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\components\finsh\msh.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\finsh\msh_file.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\components\finsh\shell.c</name>
@@ -2413,6 +2502,9 @@
     </group>
     <group>
         <name>libc</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\common\time.c</name>
+        </file>
     </group>
     <group>
         <name>netdev</name>

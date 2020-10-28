@@ -2316,6 +2316,9 @@
     <group>
         <name>Applications</name>
         <file>
+            <name>$PROJ_DIR$\applications\fal_fs_part_dev.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\applications\main.c</name>
         </file>
         <file>
@@ -2400,6 +2403,9 @@
             <name>$PROJ_DIR$\..\..\components\drivers\i2c\i2c_dev.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\components\drivers\mtd\mtd_nand.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\components\drivers\misc\pin.c</name>
         </file>
         <file>
@@ -2434,6 +2440,42 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\components\drivers\src\workqueue.c</name>
+        </file>
+    </group>
+    <group>
+        <name>dlib</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\environ.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\libc.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\rmtx.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\stdio.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_close.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_lseek.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_mem.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_open.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_read.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_remove.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\dlib\syscall_write.c</name>
         </file>
     </group>
     <group>
@@ -2521,12 +2563,48 @@
         </file>
     </group>
     <group>
+        <name>Filesystem</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\filesystems\elmfat\option\ccsbcs.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\filesystems\devfs\devfs.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\dfs.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\filesystems\elmfat\dfs_elm.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\dfs_file.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\dfs_fs.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\dfs_posix.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\filesystems\elmfat\ff.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\poll.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\dfs\src\select.c</name>
+        </file>
+    </group>
+    <group>
         <name>finsh</name>
         <file>
             <name>$PROJ_DIR$\..\..\components\finsh\cmd.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\components\finsh\msh.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\finsh\msh_file.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\components\finsh\shell.c</name>
@@ -2642,6 +2720,9 @@
     </group>
     <group>
         <name>libc</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\components\libc\compilers\common\time.c</name>
+        </file>
     </group>
     <group>
         <name>netdev</name>

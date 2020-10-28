@@ -34,7 +34,8 @@
 static struct rt_spi_device spi_dev_flash;
 
 #define SPI_BUS_NAME    "spi0"
-#define SPI_FLASH_DEVICE_NAME "spi01"
+#define SPI_DEVICE_NAME "spi01"
+#define FLASH_DEVICE_NAME "flash0"
 
 struct rt_spi_configuration cfg =
 {
@@ -59,7 +60,7 @@ int flash_init(void)
     rt_pin_write(IO_FLASH_CS, PIN_HIGH);
 	rt_pin_mode(IO_FLASH_WP, PIN_MODE_OUTPUT);
     rt_pin_write(IO_FLASH_WP, PIN_LOW);
-	res = rt_spi_bus_attach_device(&spi_dev_flash, SPI_FLASH_DEVICE_NAME, SPI_BUS_NAME, (void *)IO_FLASH_CS);
+	res = rt_spi_bus_attach_device(&spi_dev_flash, SPI_DEVICE_NAME, SPI_BUS_NAME, (void *)IO_FLASH_CS);
 	if (res != RT_EOK)
 	{
 		rt_kprintf("rt_spi_bus_attach_device!\r\n");
@@ -67,7 +68,7 @@ int flash_init(void)
 	else
 	{
 		spi_config();
-		rt_sfud_flash_probe("flash0", "spi01");
+		rt_sfud_flash_probe(FLASH_DEVICE_NAME, SPI_DEVICE_NAME);
 	}
 
     return res;
