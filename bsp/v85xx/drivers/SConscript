@@ -48,6 +48,6 @@ elif rtconfig.CROSS_TOOL == 'iar':
 
 # HT8510 || HT8530
 # You can select chips from the list above
-CPPDEFINES = ['V8510']
+CPPDEFINES = ['V8530']
 group = DefineGroup('Drivers', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
 Return('group')

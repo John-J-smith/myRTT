@@ -108,40 +108,30 @@ static rt_err_t uart_configure(struct rt_serial_device *serial, struct serial_co
 
     if(uart == UART0)
     {
-        GPIOA_Init(GPIOA, &(GPIO_InitType){GPIO_Pin_12, GPIO_Mode_INPUT});
-        GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_2, GPIO_Mode_OUTPUT_CMOS});
         CORTEX_SetPriority_ClearPending_EnableIRQ(UART0_IRQn, 0);
     }
     else if(uart == UART1)
     {
-        GPIOA_Init(GPIOA, &(GPIO_InitType){GPIO_Pin_13, GPIO_Mode_INPUT});
-        GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_3, GPIO_Mode_OUTPUT_CMOS});
         CORTEX_SetPriority_ClearPending_EnableIRQ(UART1_IRQn, 0);
     }
     else if(uart == UART2)
     {
-        GPIOA_Init(GPIOA, &(GPIO_InitType){GPIO_Pin_14, GPIO_Mode_INPUT});
-        GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_4, GPIO_Mode_OUTPUT_CMOS});
         CORTEX_SetPriority_ClearPending_EnableIRQ(UART2_IRQn, 0);
     }
     else if(uart == UART3)
     {
-        GPIOA_Init(GPIOA, &(GPIO_InitType){GPIO_Pin_15, GPIO_Mode_INPUT});
-        GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_5, GPIO_Mode_OUTPUT_CMOS});
         CORTEX_SetPriority_ClearPending_EnableIRQ(UART3_IRQn, 0);
     }
     else if(uart == UART4)
     {
-        GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_0, GPIO_Mode_INPUT});
-        GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_6, GPIO_Mode_OUTPUT_CMOS});
         CORTEX_SetPriority_ClearPending_EnableIRQ(UART4_IRQn, 0);
     }
     else if(uart == UART5)
     {
-        GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_1, GPIO_Mode_INPUT});
-        GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_7, GPIO_Mode_OUTPUT_CMOS}); /* note: V8510 no PB7 */
         CORTEX_SetPriority_ClearPending_EnableIRQ(UART5_IRQn, 0);
     }
+
+    rt_hw_uart_enable(uart);
 
     return RT_EOK;
 }
@@ -349,6 +339,10 @@ int rt_hw_uart_init(void)
 
 #if defined(BSP_USING_UART0)
     uart = UART0;
+
+    GPIOA_Init(GPIOA, &(GPIO_InitType){GPIO_Pin_12, GPIO_Mode_INPUT});
+    GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_2, GPIO_Mode_OUTPUT_CMOS});
+
     serial0.ops    = &uart_ops;
     serial0.config = config;
 
@@ -358,6 +352,10 @@ int rt_hw_uart_init(void)
 
 #if defined(BSP_USING_UART1)
     uart = UART1;
+
+    GPIOA_Init(GPIOA, &(GPIO_InitType){GPIO_Pin_13, GPIO_Mode_INPUT});
+    GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_3, GPIO_Mode_OUTPUT_CMOS});
+
     serial1.ops    = &uart_ops;
     serial1.config = config;
 
@@ -367,6 +365,10 @@ int rt_hw_uart_init(void)
 
 #if defined(BSP_USING_UART2)
     uart = UART2;
+
+    GPIOA_Init(GPIOA, &(GPIO_InitType){GPIO_Pin_14, GPIO_Mode_INPUT});
+    GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_4, GPIO_Mode_OUTPUT_CMOS});
+
     serial2.ops    = &uart_ops;
     serial2.config = config;
 
@@ -376,6 +378,10 @@ int rt_hw_uart_init(void)
 
 #if defined(BSP_USING_UART3)
     uart = UART3;
+
+    GPIOA_Init(GPIOA, &(GPIO_InitType){GPIO_Pin_15, GPIO_Mode_INPUT});
+    GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_5, GPIO_Mode_OUTPUT_CMOS});
+
     serial3.ops    = &uart_ops;
     serial3.config = config;
 
@@ -385,6 +391,10 @@ int rt_hw_uart_init(void)
 
 #if defined(BSP_USING_UART4)
     uart = UART4;
+
+    GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_0, GPIO_Mode_INPUT});
+    GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_6, GPIO_Mode_OUTPUT_CMOS});
+
     serial4.ops    = &uart_ops;
     serial4.config = config;
 
@@ -394,6 +404,10 @@ int rt_hw_uart_init(void)
 
 #if defined(BSP_USING_UART5)
     uart = UART5;
+
+    GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_1, GPIO_Mode_INPUT});
+    GPIOBToF_Init(GPIOB, &(GPIO_InitType){GPIO_Pin_7, GPIO_Mode_OUTPUT_CMOS});/* V8510 no PB7 */
+
     serial5.ops    = &uart_ops;
     serial5.config = config;
 
