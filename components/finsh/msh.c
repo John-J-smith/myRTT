@@ -94,6 +94,8 @@ int cmd_ps(int argc, char **argv)
     extern long list_thread(void);
     extern int list_module(void);
 
+    rt_kprintf("uptime %d.%d s\n", rt_tick_get()/RT_TICK_PER_SECOND, rt_tick_get() - (rt_tick_get()/RT_TICK_PER_SECOND)*RT_TICK_PER_SECOND);
+
 #ifdef RT_USING_MODULE
     if ((argc == 2) && (strcmp(argv[1], "-m") == 0))
         list_module();

@@ -176,7 +176,7 @@ rt_hw_context_switch_to:
     STR     r1, [r0]
     NOP
 
-    ; because HT6037 not support SCB->VTOR, the following code will set app msp into bootloader msp. 2020-10-25
+    ; because some cotex M0 soc not support SCB->VTOR, the following code will set app msp into bootloader msp. 2020-10-25
     ; restore MSP
     ;LDR     r0, =SCB_VTOR
     ;LDR     r0, [r0]

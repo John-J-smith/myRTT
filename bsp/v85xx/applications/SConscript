@@ -1,0 +1,20 @@
+Import('RTT_ROOT')
+Import('rtconfig')
+from building import *
+
+cwd = GetCurrentDir()
+
+src = Glob('main.c')
+if GetDepend('RT_USING_RYM'):
+    src = src + Glob('ymodem_upgrade.c')
+    
+if GetDepend('PKG_USING_FAL'):
+    if GetDepend('RT_USING_DFS'):
+        if GetDepend('RT_USING_DFS_ELMFAT'):
+            src = src + Glob('fal_fs_part_dev.c')
+    
+CPPPATH = [cwd, str(Dir('#'))]
+
+group = DefineGroup('Applications', src, depend = [''], CPPPATH = CPPPATH)
+
+Return('group')

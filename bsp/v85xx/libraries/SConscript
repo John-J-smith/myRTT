@@ -1,0 +1,46 @@
+import rtconfig
+Import('RTT_ROOT')
+from building import *
+
+# get current directory
+cwd = GetCurrentDir()
+
+# The set of source files associated with this SConscript file.
+src = Split("""
+CMSIS/device/lib_CodeRAM.c
+CMSIS/device/lib_cortex.c
+CMSIS/device/lib_LoadNVR.c
+Lib_Driver/src/lib_adc.c
+Lib_Driver/src/lib_adc_tiny.c
+Lib_Driver/src/lib_ana.c
+Lib_Driver/src/lib_clk.c
+Lib_Driver/src/lib_comp.c
+Lib_Driver/src/lib_crypt.c
+Lib_Driver/src/lib_dma.c
+Lib_Driver/src/lib_flash.c
+Lib_Driver/src/lib_gpio.c
+Lib_Driver/src/lib_i2c.c
+Lib_Driver/src/lib_iso7816.c
+Lib_Driver/src/lib_lcd.c
+Lib_Driver/src/lib_misc.c
+Lib_Driver/src/lib_pmu.c
+Lib_Driver/src/lib_pwm.c
+Lib_Driver/src/lib_rtc.c
+Lib_Driver/src/lib_spi.c
+Lib_Driver/src/lib_tmr.c
+Lib_Driver/src/lib_u32k.c
+Lib_Driver/src/lib_uart.c
+Lib_Driver/src/lib_version.c
+Lib_Driver/src/lib_wdt.c
+""")
+
+path = [cwd,
+        cwd + '/CMSIS/include', 
+        cwd + '/Lib_Driver/inc']
+
+CPPDEFINES = ['V85XX',
+              'USE_TARGET_DRIVER',
+              '_TARGET_EWARM_USED']
+group = DefineGroup('v85xx_hal', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('group')

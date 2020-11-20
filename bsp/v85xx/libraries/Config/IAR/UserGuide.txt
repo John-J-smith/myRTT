@@ -1,0 +1,21 @@
+startup_target.s 
+ 1. The Reset_handler and Chip_Init in the startup file are placed on the section which the first address is fixed at 0XCO. 
+ 2. Chip_Init in the startup file loads the following parameter:
+	1、Load flash configuration.
+      	2、Load ANA_REG(B/C/D/E) information.
+	3、IOE6/IOE7 forbidden, disable output, disable input.
+	4、Configure crystal drive capability(ANA_REG4[Bit0] = 1).
+	5、VLCD setting .
+        6、SWT2VDD = 0; SWT2BAT = 1.
+Feature: Rrequired file.
+Purpose: If user only have one project, then the startup_target.s file should be used.
+      	 If user have two project, one is IAP(In application programming) project, and another is APP(application) project, 
+         then startup_target.s file should be used in IAP project, and startup_target_noload.s file should be used in APP project.
+
+
+startup_target_noload.s
+ 1. Reset_handler location do not have special processing.
+ 2. Without Chip_Init code to loads the parameter.
+Feature: Optional file.
+Purpose: If user have two project, one is IAP(In application programming) project, and another is APP(application) project, 
+         then startup_target.s file should be used in IAP project, and startup_target_noload.s file should be used in APP project.
