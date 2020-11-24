@@ -183,7 +183,7 @@ static int uart_putc(struct rt_serial_device *serial, char c)
     RT_ASSERT(uart != RT_NULL);
 
     UART_SendData(uart, c);
-    while(1!= UART_GetFlag(uart, UART_FLAG_TXDONE));
+    while(1 != UART_GetFlag(uart, UART_FLAG_TXDONE));
     UART_ClearFlag(uart, UART_FLAG_TXDONE);
 
     return 1;

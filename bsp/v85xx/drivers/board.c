@@ -103,6 +103,7 @@ void ANA_Config(void)
 
 void rt_hw_board_init(void)
 {
+    ANA_Config();
 	clock_init();
 
     SysTick_Config(26214400/1000);

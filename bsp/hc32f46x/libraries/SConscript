@@ -1,0 +1,64 @@
+import rtconfig
+Import('RTT_ROOT')
+from building import *
+
+# get current directory
+cwd = GetCurrentDir()
+
+# The set of source files associated with this SConscript file.
+src = Split("""
+mcu/common/system_hc32f46x.c
+driver/src/hc32f46x_adc.c
+driver/src/hc32f46x_aes.c
+driver/src/hc32f46x_can.c
+driver/src/hc32f46x_clk.c
+driver/src/hc32f46x_cmp.c
+driver/src/hc32f46x_crc.c
+driver/src/hc32f46x_dcu.c
+driver/src/hc32f46x_dmac.c
+driver/src/hc32f46x_efm.c
+driver/src/hc32f46x_emb.c
+driver/src/hc32f46x_event_port.c
+driver/src/hc32f46x_exint_nmi_swi.c
+driver/src/hc32f46x_gpio.c
+driver/src/hc32f46x_hash.c
+driver/src/hc32f46x_i2c.c
+driver/src/hc32f46x_i2s.c
+driver/src/hc32f46x_icg.c
+driver/src/hc32f46x_interrupts.c
+driver/src/hc32f46x_keyscan.c
+driver/src/hc32f46x_mpu.c
+driver/src/hc32f46x_ots.c
+driver/src/hc32f46x_pwc.c
+driver/src/hc32f46x_qspi.c
+driver/src/hc32f46x_rmu.c
+driver/src/hc32f46x_rtc.c
+driver/src/hc32f46x_sdioc.c
+driver/src/hc32f46x_spi.c
+driver/src/hc32f46x_sram.c
+driver/src/hc32f46x_swdt.c
+driver/src/hc32f46x_timer0.c
+driver/src/hc32f46x_timer4_cnt.c
+driver/src/hc32f46x_timer4_emb.c
+driver/src/hc32f46x_timer4_oco.c
+driver/src/hc32f46x_timer4_pwm.c
+driver/src/hc32f46x_timer4_sevt.c
+driver/src/hc32f46x_timer6.c
+driver/src/hc32f46x_timera.c
+driver/src/hc32f46x_trng.c
+driver/src/hc32f46x_usart.c
+driver/src/hc32f46x_utility.c
+driver/src/hc32f46x_wdt.c
+""")
+
+path = [cwd,
+        cwd + '/mcu/common', 
+        cwd + '/driver/inc',
+        cwd + '/CMSIS/include']
+
+CPPDEFINES = ['__DEBUG',
+              'HC32F46x',
+              'USE_DEVICE_DRIVER_LIB']
+group = DefineGroup('h32f46xx_hal', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('group')
