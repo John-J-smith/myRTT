@@ -2,11 +2,11 @@
 
 <flash_board>
   <pass>
-    <loader>$PROJ_DIR$\flashloader\FlashHC32F46x.flash</loader>
+    <loader>$PROJ_DIR$\libraries\mcu\EWARM\config\flashloader\FlashHC32F46x.flash</loader>
     <range>CODE 0x0 0x7FFFF</range>
   </pass>
   <pass>
-    <loader>$PROJ_DIR$\flashloader\FlashHC32F46x_otp.flash</loader>
+    <loader>$PROJ_DIR$\libraries\mcu\EWARM\config\flashloader\FlashHC32F46x_otp.flash</loader>
     <range>CODE 0x03000C00 0x03000FFB</range>
   </pass>
 </flash_board>

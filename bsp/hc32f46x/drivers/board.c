@@ -145,10 +145,23 @@ void clock_init(void)
     CLK_GetClockFreq(&stcClkFreq);
 }
 
+void m_HD_GPIO_PinMode(en_port_t enPort, en_pin_t u16Pin, en_pin_mode_t pinMode, en_functional_state_t enNewState)
+{
+    stc_port_init_t stPortInit;
+    /* configuration structure initialization */
+    MEM_ZERO_STRUCT(stPortInit);
+
+    stPortInit.enPinMode = pinMode;
+    stPortInit.enPullUp = enNewState;
+
+    PORT_Init(enPort, u16Pin, &stPortInit);
+}
+
 void rt_hw_board_init(void)
 {
+    //SCB->VTOR = 0xa000;
 	clock_init();
-
+    
     SysTick_Config(SystemCoreClock/1000);
     NVIC_SetPriority(SysTick_IRQn, 0xff);
 

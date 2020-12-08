@@ -12,12 +12,16 @@ menu "Onboard Peripheral Drivers"
 	config BSP_USING_EEPROM
         bool "Enable eeprom"
         select BSP_USING_I2C
-        default y
+        default n
 		
 	config BSP_USING_FLASH
         bool "Enable data flash"
         select BSP_USING_SPI
-        default y
+        default n
+		
+	config BSP_USING_ONCHIP_FLASH
+        bool "Enable onchip flash"
+        default n
 
 endmenu
 
@@ -81,11 +85,16 @@ menu "On-chip Peripheral Drivers"
 			if BSP_USING_SPI
 				config BSP_USING_SPI1
 					bool "Enable SPI1"
-					default y
+					default n
 				
 				config BSP_USING_SPI2
 					bool "Enable SPI2"
 					default n
+				
+				config BSP_USING_SPI3
+					bool "Enable SPI3"
+					default y
+					
 			endif
 endmenu
 

@@ -19,7 +19,7 @@ packages/
 *~
 *.o
 *.obj
-*.out
+#*.out
 *.bak
 *.dep
 *.lib

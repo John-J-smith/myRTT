@@ -366,9 +366,9 @@ en_result_t PORT_DeInit(void)
             *(uint16_t *)(GPIO_BASE + PFSR_BASE + u8PortIdx * 0x40ul + u8PinIdx * 0x4ul) = 0u;
         }
     }
-    M4_PORT->PCCR   = 0u;
+    M4_PORT->PCCR   = 0xc000u;
     M4_PORT->PINAER = 0u;
-    M4_PORT->PSPCR  = 0x1Fu;
+    M4_PORT->PSPCR  = 0x03u;
 
     PORT_Lock();
     return Ok;

@@ -123,10 +123,10 @@ static hdsc_uart_t hdsc_uart_3 =
 {
     M4_USART3,
     /* USART TX conifg */
-    PortB, Pin06, Func_Usart3_Tx,
+    PortB, Pin04, Func_Usart3_Tx,
     {INT_USART3_TCI, Int004_IRQn, &UART3_IRQHandler},
     /* USART RX conifg */
-    PortB, Pin07, Func_Usart3_Rx,
+    PortB, Pin03, Func_Usart3_Rx,
     {INT_USART3_RI, Int005_IRQn, &UART3_IRQHandler},
 };
 #endif /* BSP_USING_UART3 */
@@ -265,7 +265,7 @@ static rt_err_t uart_configure(struct rt_serial_device *serial, struct serial_co
     stcIrqRegiCfg.pfnCallback = uart->rx_irq_conf.pfnCallback;
     stcIrqRegiCfg.enIntSrc = uart->rx_irq_conf.enIntSrc;
     enIrqRegistration(&stcIrqRegiCfg);
-    NVIC_SetPriority(stcIrqRegiCfg.enIRQn, DDL_IRQ_PRIORITY_DEFAULT);
+    NVIC_SetPriority(stcIrqRegiCfg.enIRQn, DDL_IRQ_PRIORITY_02);
     NVIC_ClearPendingIRQ(stcIrqRegiCfg.enIRQn);
     NVIC_EnableIRQ(stcIrqRegiCfg.enIRQn);
 
@@ -274,7 +274,7 @@ static rt_err_t uart_configure(struct rt_serial_device *serial, struct serial_co
     stcIrqRegiCfg.pfnCallback = uart->tx_irq_conf.pfnCallback;
     stcIrqRegiCfg.enIntSrc = uart->tx_irq_conf.enIntSrc;
     enIrqRegistration(&stcIrqRegiCfg);
-    NVIC_SetPriority(stcIrqRegiCfg.enIRQn, DDL_IRQ_PRIORITY_DEFAULT);
+    NVIC_SetPriority(stcIrqRegiCfg.enIRQn, DDL_IRQ_PRIORITY_02);
     NVIC_ClearPendingIRQ(stcIrqRegiCfg.enIRQn);
     NVIC_EnableIRQ(stcIrqRegiCfg.enIRQn);*/
 

@@ -76,4 +76,3 @@ cconfig.h
 *.lo
 
 # iar project
-*.ewp

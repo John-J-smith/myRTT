@@ -216,7 +216,6 @@ static void ht_pin_mode(rt_device_t dev, rt_base_t pin, rt_base_t mode)
         /* output setting */
         stcPortInit.enPinMode = Pin_Mode_Out;
         stcPortInit.enPullUp = Enable;
-        stcPortInit.enPinOType = Pin_OType_Cmos;
     }
     else if (mode == PIN_MODE_INPUT)
     {
@@ -243,6 +242,7 @@ static void ht_pin_mode(rt_device_t dev, rt_base_t pin, rt_base_t mode)
         stcPortInit.enPullUp = Enable;
         stcPortInit.enPinOType = Pin_OType_Od;
     }
+    PORT_SetFunc(index->gpio, index->pin, Func_Gpio, Disable);
     PORT_Init(index->gpio, index->pin, &stcPortInit);
 }
 
@@ -390,6 +390,8 @@ void EXTI9_IRQHandler(void)
 
 int rt_hw_pin_init(void)
 {
+    PORT_DeInit();
+
     return rt_device_pin_register("pin", &_ht_pin_ops, RT_NULL);
 }
 //INIT_BOARD_EXPORT(rt_hw_pin_init);

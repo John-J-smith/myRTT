@@ -53,32 +53,20 @@ int rt_hw_pin_init(void);
 
 /* Pin map */
 // led
-#define IO_RUN_LED  	GET_PIN(B, 3)
-#define IO_TX_LED  		GET_PIN(D, 2)
-#define IO_RX_LED  		GET_PIN(A, 3)
+#define IO_ALARM_LED    GET_PIN(A, 8)
+#define IO_ACT_LED      GET_PIN(A, 10)
+#define IO_TX_LED       GET_PIN(A, 11)
+#define IO_RX_LED       GET_PIN(A, 12)
 
 // data flash write enable & chip select
-#define IO_FLASH_WP     GET_PIN(C, 4)
-#define IO_FLASH_CS     GET_PIN(C, 0)
+#define IO_FLASH_CS     GET_PIN(B, 13)
 
 // spi1
-#define IO_SPI1_SCK     GET_PIN(B, 10)
-#define IO_SPI1_MISO    GET_PIN(B, 11)
-#define IO_SPI1_MOSI    GET_PIN(B, 12)
+#define IO_SPI3_SCK     GET_PIN(B, 10)
+#define IO_SPI3_MISO    GET_PIN(B, 11)
+#define IO_SPI3_MOSI    GET_PIN(B, 12)
 
-// spi2
-#define IO_SPI2_SCK     GET_PIN(C, 1)
-#define IO_SPI2_MISO    GET_PIN(C, 2)
-#define IO_SPI2_MOSI    GET_PIN(C, 3)
 
-// i2c
-#define IO_EE_WP        GET_PIN(E, 3)
-#define IO_I2C1_SCL     GET_PIN(B, 8)
-#define IO_I2C1_SDA     GET_PIN(B, 9)
-
-// io
-#define IO_MODEM_PWRKEY GET_PIN(C, 9)
-#define IO_MODEM_RESET  GET_PIN(C, 10)
 
 #endif /* __GPIO_H__ */
 
