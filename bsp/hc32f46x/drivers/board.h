@@ -53,14 +53,23 @@ extern "C" {
 
 
 #if defined(__CC_ARM) || defined(__CLANG_ARM)
-extern int Image$$RW_IRAM1$$ZI$$Limit;
-#define HEAP_BEGIN      ((void *)&Image$$RW_IRAM1$$ZI$$Limit)
+
+    extern int Image$$RW_IRAM1$$ZI$$Limit;
+    #define HEAP_BEGIN      ((void *)&Image$$RW_IRAM1$$ZI$$Limit)
+    #define COMPILER_TYPE   "cc arm"
+
 #elif __ICCARM__
-#pragma section="CSTACK"
-#define HEAP_BEGIN      (__segment_end("CSTACK"))
+
+    #pragma section="CSTACK"
+    #define HEAP_BEGIN      (__segment_end("CSTACK"))
+    #define COMPILER_TYPE   "iar"
+
 #else
-extern int __bss_end;
-#define HEAP_BEGIN      ((void *)&__bss_end)
+
+    extern int __bss_end;
+    #define HEAP_BEGIN      (void *)0x20000000//((void *)&__bss_end)  // fixme 2020-12-09: 当起始地址为__bss_end时，会总线错误
+    #define COMPILER_TYPE   "others"
+
 #endif
 
 #define HEAP_END        ONCHIP_SRAM_END

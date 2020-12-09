@@ -139,6 +139,6 @@ static rt_err_t ry(uint8_t argc, char **argv)
 
     return res;
 }
-MSH_CMD_EXPORT(ry, YMODEM Receive e.g: ry [uart0] default by console.);
+FINSH_FUNCTION_EXPORT_ALIAS(ry, ymodem, YMODEM Receive e.g: ry [uart0] default by console.);
 
 #endif /* RT_USING_FINSH */

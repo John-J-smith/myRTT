@@ -81,7 +81,7 @@ __StackTop:
 ;  <o> Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ;</h>
 */
-                .equ        Heap_Size, 0x00000C00
+                .equ        Heap_Size, 0x00000000
 
                 .if         Heap_Size != 0                     /* Heap is provided */
                 .section    .heap
@@ -297,8 +297,8 @@ Reset_Handler:
                 /* Copy data from read only memory to RAM. */
 CopyData:
                 ldr         r1, =__etext
-                ldr         r2, =__data_start__
-                ldr         r3, =__data_end__
+                ldr         r2, =__data_start
+                ldr         r3, =__data_end
 CopyLoop:
                 cmp         r2, r3
                 ittt        lt
@@ -308,8 +308,8 @@ CopyLoop:
 
 CopyData1:
                 ldr         r1, =__etext_ret_ram
-                ldr         r2, =__data_start_ret_ram__
-                ldr         r3, =__data_end_ret_ram__
+                ldr         r2, =__data_start_ret_ram
+                ldr         r3, =__data_end_ret_ram
 CopyLoop1:
                 cmp         r2, r3
                 ittt        lt
@@ -337,8 +337,8 @@ CopyLoop1:
  */
                 /* Clear BSS section. */
 ClearBss:
-                ldr         r1, =__bss_start__
-                ldr         r2, =__bss_end__
+                ldr         r1, =__bss_start
+                ldr         r2, =__bss_end
 
                 movs        r0, 0
 ClearLoop:
@@ -348,8 +348,8 @@ ClearLoop:
                 blt         ClearLoop
 
 ClearBss1:
-                ldr         r1, =__bss_start_ret_ram__
-                ldr         r2, =__bss_end_ret_ram__
+                ldr         r1, =__bss_start_ret_ram
+                ldr         r2, =__bss_end_ret_ram
 
                 movs        r0, 0
 ClearLoop1:
@@ -381,8 +381,8 @@ SetSRAM3Wait:
 
                 /* Call the clock system initialization function. */
                 bl          SystemInit
-                /* Call the application's entry point. */
-                bl          main
+                /* Call the application entry point. */
+                bl          entry
                 bx          lr
                 .size       Reset_Handler, . - Reset_Handler
 /*

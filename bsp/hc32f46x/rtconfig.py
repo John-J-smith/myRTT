@@ -3,7 +3,7 @@ import os
 # toolchains options
 ARCH='arm'
 CPU='cortex-m4'
-CROSS_TOOL='iar'
+CROSS_TOOL='gcc'
 
 # bsp lib config
 BSP_LIBRARY_TYPE = None
@@ -13,11 +13,14 @@ if os.getenv('RTT_CC'):
 if os.getenv('RTT_ROOT'):
     RTT_ROOT = os.getenv('RTT_ROOT')
 
+print("corss tool is %s" %(CROSS_TOOL))
+print("root is %s" %(RTT_ROOT))
+
 # cross_tool provides the cross compiler
 # EXEC_PATH is the compiler execute path, for example, CodeSourcery, Keil MDK, IAR
 if  CROSS_TOOL == 'gcc':
     PLATFORM    = 'gcc'
-    EXEC_PATH   = r'C:\Users\XXYYZZ'
+    EXEC_PATH   = r'D:/gcc/gcc-arm-none-eabi-9-2020-q2-update-win32/bin'
 elif CROSS_TOOL == 'keil':
     PLATFORM    = 'armcc'
     EXEC_PATH   = r'C:/Keil_v5'
@@ -42,14 +45,24 @@ if PLATFORM == 'gcc':
     SIZE = PREFIX + 'size'
     OBJDUMP = PREFIX + 'objdump'
     OBJCPY = PREFIX + 'objcopy'
+    # STRIP = 'strip'
 
-    DEVICE = ' -mcpu=cortex-m0 -mthumb -ffunction-sections -fdata-sections'
+    DEVICE = ' -mcpu=cortex-m4 -mthumb -ffunction-sections -fdata-sections'
     CFLAGS = DEVICE + ' -Dgcc'
     AFLAGS = ' -c' + DEVICE + ' -x assembler-with-cpp -Wa,-mimplicit-it=thumb '
-    LFLAGS = DEVICE + ' -Wl,--gc-sections,-Map=rt-thread.map,-cref,-u,Reset_Handler -T drivers/linker_scripts/link.lds'
-
+    LFLAGS = DEVICE + ' -Wl,--gc-sections,-Map=rt-thread.map,-cref,-u,Reset_Handler -T libraries/mcu/GCC/LinkerScript/hc32f46x_flash.ld'
+    CXXFLAGS = DEVICE + ' -Dgcc'
+    
     CPATH = ''
     LPATH = ''
+   
+    # for dmodule
+    M_CFLAGS = CFLAGS + ' -mlong-calls -fPIC '
+    M_CXXFLAGS = CXXFLAGS + ' -mlong-calls -fPIC'
+    M_LFLAGS = DEVICE + CXXFLAGS + ' -Wl,--gc-sections,-z,max-page-size=0x4' + ' -shared -fPIC -nostartfiles -nostdlib -static-libgcc'
+    # M_POST_ACTION = STRIP + ' -R .hash $TARGET\n' + SIZE + ' $TARGET \n'
+    M_BIN_PATH = r'D:\github\myRTT\bsp\hc32f46x\dmodule'
+    # end
 
     if BUILD == 'debug':
         CFLAGS += ' -O0 -gdwarf-2 -g'
@@ -70,7 +83,7 @@ elif PLATFORM == 'armcc':
     LINK = 'armlink'
     TARGET_EXT = 'axf'
 
-    DEVICE = ' --cpu Cortex-M0 '
+    DEVICE = ' --cpu Cortex-M4 '
     CFLAGS = '-c ' + DEVICE + ' --apcs=interwork --c99'
     AFLAGS = DEVICE + ' --apcs=interwork '
     LFLAGS = DEVICE + ' --scatter "drivers\linker_scripts\link.sct" --info sizes --info totals --info unused --info veneers --list rt-thread.map --strict'
@@ -114,7 +127,7 @@ elif PLATFORM == 'iar':
     CFLAGS += ' --no_clustering'
     CFLAGS += ' --no_scheduling'
     CFLAGS += ' --endian=little'
-    CFLAGS += ' --cpu=Cortex-M0'
+    CFLAGS += ' --cpu=Cortex-M4'
     CFLAGS += ' -e'
     CFLAGS += ' --fpu=None'
     CFLAGS += ' --dlib_config "' + EXEC_PATH + '/arm/INC/c/DLib_Config_Normal.h"'
@@ -124,7 +137,7 @@ elif PLATFORM == 'iar':
     AFLAGS += ' -s+'
     AFLAGS += ' -w+'
     AFLAGS += ' -r'
-    AFLAGS += ' --cpu Cortex-M0'
+    AFLAGS += ' --cpu Cortex-M4'
     AFLAGS += ' --fpu None'
     AFLAGS += ' -S'
 

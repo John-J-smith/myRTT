@@ -15,7 +15,7 @@
 #define RT_USING_HOOK
 #define RT_USING_IDLE_HOOK
 #define RT_IDLE_HOOK_LIST_SIZE 4
-#define IDLE_THREAD_STACK_SIZE 192
+#define IDLE_THREAD_STACK_SIZE 2048
 #define RT_DEBUG
 #define RT_DEBUG_COLOR
 
@@ -45,7 +45,7 @@
 
 #define RT_USING_COMPONENTS_INIT
 #define RT_USING_USER_MAIN
-#define RT_MAIN_THREAD_STACK_SIZE 1024
+#define RT_MAIN_THREAD_STACK_SIZE 4096
 #define RT_MAIN_THREAD_PRIORITY 2
 
 /* C++ features */
@@ -112,6 +112,7 @@
 
 #define RT_USING_LIBC
 #define RT_USING_POSIX
+#define RT_USING_MODULE
 
 /* Network */
 
@@ -132,6 +133,9 @@
 
 /* Utilities */
 
+#define RT_USING_RYM
+#define YMODEM_USING_CRC_TABLE
+#define YMODEM_USING_FILE_TRANSFER
 #define RT_USING_ULOG
 #define ULOG_OUTPUT_LVL_D
 #define ULOG_OUTPUT_LVL 7
@@ -188,6 +192,8 @@
 #define PKG_EASYFLASH_DEBUG
 #define PKG_USING_EASYFLASH_V410
 #define PKG_EASYFLASH_VER_NUM 0x40100
+#define PKG_USING_CPU_USAGE
+#define PKG_USING_CPU_USAGE_LATEST_VERSION
 
 /* system packages */
 

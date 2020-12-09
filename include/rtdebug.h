@@ -40,7 +40,7 @@
 #endif
 
 #ifndef RT_DEBUG_MODULE
-#define RT_DEBUG_MODULE                0
+#define RT_DEBUG_MODULE                1
 #endif
 
 #ifndef RT_DEBUG_SCHEDULER
@@ -68,7 +68,7 @@
 #endif
 
 #ifndef RT_DEBUG_INIT
-#define RT_DEBUG_INIT                  0
+#define RT_DEBUG_INIT                  1
 #endif
 
 /* Turn on this to enable context check */

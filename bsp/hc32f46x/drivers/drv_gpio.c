@@ -129,12 +129,12 @@ static const struct pin_index pins[] =
 
 static const struct pin_irq_map pin_irq_map[] =
 {
-    {0, NULL},
+    {0, 0},
 };
 
 static struct rt_pin_irq_hdr pin_irq_hdr_tab[] =
 {
-    {0, NULL},
+    {0, 0, NULL, NULL},
 };
 
 static uint32_t pin_irq_enable_mask = 0;

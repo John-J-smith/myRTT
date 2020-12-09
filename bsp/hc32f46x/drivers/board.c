@@ -161,7 +161,7 @@ void rt_hw_board_init(void)
 {
     //SCB->VTOR = 0xa000;
 	clock_init();
-    
+
     SysTick_Config(SystemCoreClock/1000);
     NVIC_SetPriority(SysTick_IRQn, 0xff);
 
@@ -180,4 +180,7 @@ void rt_hw_board_init(void)
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
 #endif /* RT_USING_COMPONENTS_INIT */
+
+    rt_kprintf("build by %s toolchain\n", COMPILER_TYPE);
+    rt_kprintf("heap begin %x, end %x\n", (void *)HEAP_BEGIN, (void *)HEAP_END);
 }

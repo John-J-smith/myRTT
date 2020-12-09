@@ -69,6 +69,7 @@ SECTIONS
         . = ALIGN(4);
     } >FLASH
 
+    /* initial config */
     .icg_sec 0x00000400 :
     {
         KEEP(*(.icg_sec))
@@ -77,15 +78,43 @@ SECTIONS
     .text :
     {
         . = ALIGN(4);
+        _stext = .;
         *(.text)
         *(.text*)
         *(.glue_7)
         *(.glue_7t)
         *(.eh_frame)
 
+        /* section information for finsh shell */
+        . = ALIGN(4);
+        __fsymtab_start = .;
+        KEEP(*(FSymTab))
+        __fsymtab_end = .;
+
+        . = ALIGN(4);
+        __vsymtab_start = .;
+        KEEP(*(VSymTab))
+        __vsymtab_end = .;
+		
+        /* section information for modules */
+        . = ALIGN(4);
+        __rtmsymtab_start = .;
+        KEEP(*(RTMSymTab))
+        __rtmsymtab_end = .;
+		
+        /* section information for initial. */
+        . = ALIGN(4);
+        __rt_init_start = .;
+        KEEP(*(SORT(.rti_fn*)))
+        __rt_init_end = .;
+		
+        . = ALIGN(4);
+
         KEEP(*(.init))
         KEEP(*(.fini))
         . = ALIGN(4);
+		
+        _etext = .;
     } >FLASH
 
     .rodata :
@@ -107,7 +136,7 @@ SECTIONS
         *(.ARM.exidx* .gnu.linkonce.armexidx.*)
     } >FLASH
     __exidx_end = .;
-
+	
     .preinit_array :
     {
         . = ALIGN(4);
@@ -128,7 +157,7 @@ SECTIONS
         PROVIDE_HIDDEN (__init_array_end = .);
         . = ALIGN(4);
     } >FLASH
-
+	
     .fini_array :
     {
         . = ALIGN(4);
@@ -155,7 +184,7 @@ SECTIONS
     .data : AT (__etext)
     {
         . = ALIGN(4);
-        __data_start__ = .;
+        __data_start = .;
         *(vtable)
         *(.data)
         *(.data*)
@@ -163,41 +192,41 @@ SECTIONS
         *(.ramfunc)
         *(.ramfunc*)
         . = ALIGN(4);
-        __data_end__ = .;
+        __data_end = .;
     } >RAM
 
     __etext_ret_ram = __etext + ALIGN (SIZEOF(.data), 4);
     .ret_ram_data : AT (__etext_ret_ram)
     {
         . = ALIGN(4);
-        __data_start_ret_ram__ = .;
+        __data_start_ret_ram = .;
         *(.ret_ram_data)
         *(.ret_ram_data*)
         . = ALIGN(4);
-        __data_end_ret_ram__ = .;
+        __data_end_ret_ram = .;
     } >RET_RAM
 
     .bss :
     {
         . = ALIGN(4);
         _sbss = .;
-        __bss_start__ = _sbss;
+        __bss_start = _sbss;
         *(.bss)
         *(.bss*)
         *(COMMON)
         . = ALIGN(4);
         _ebss = .;
-        __bss_end__ = _ebss;
+        __bss_end = _ebss;
     } >RAM
 
     .ret_ram_bss :
     {
         . = ALIGN(4);
-        __bss_start_ret_ram__ = .;
+        __bss_start_ret_ram = .;
         *(.ret_ram_bss)
         *(.ret_ram_bss*)
         . = ALIGN(4);
-        __bss_end_ret_ram__ = .;
+        __bss_end_ret_ram = .;
     } >RET_RAM
 
     .heap_stack (COPY) :
@@ -210,10 +239,12 @@ SECTIONS
         . = ALIGN(8);
         __HeapLimit = .;
 
+        _sstack = .;
         __StackLimit = .;
         *(.stack*)
         . = ALIGN(8);
         __StackTop = .;
+        _estack = .;
     } >RAM
 
     /DISCARD/ :
