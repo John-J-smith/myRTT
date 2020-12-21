@@ -73,10 +73,10 @@ static hdsc_uart_t hdsc_uart_1 =
 {
     M4_USART1,
     /* USART TX conifg */
-    PortB, Pin06, Func_Usart1_Tx,
+    PortA, Pin05, Func_Usart1_Tx,
     {INT_USART1_TCI, Int000_IRQn, &UART1_IRQHandler},
     /* USART RX conifg */
-    PortB, Pin07, Func_Usart1_Rx,
+    PortA, Pin01, Func_Usart1_Rx,
     {INT_USART1_RI, Int001_IRQn, &UART1_IRQHandler},
 };
 #endif /* BSP_USING_UART1 */
@@ -98,10 +98,10 @@ static hdsc_uart_t hdsc_uart_2 =
 {
     M4_USART2,
     /* USART TX conifg */
-    PortB, Pin06, Func_Usart2_Tx,
+    PortA, Pin03, Func_Usart2_Tx,
     {INT_USART2_TCI, Int002_IRQn, &UART2_IRQHandler},
     /* USART RX conifg */
-    PortB, Pin07, Func_Usart2_Rx,
+    PortA, Pin00, Func_Usart2_Rx,
     {INT_USART2_RI, Int003_IRQn, &UART2_IRQHandler},
 };
 #endif /* BSP_USING_UART2 */
@@ -123,10 +123,10 @@ static hdsc_uart_t hdsc_uart_3 =
 {
     M4_USART3,
     /* USART TX conifg */
-    PortB, Pin04, Func_Usart3_Tx,
+    PortB, Pin08, Func_Usart3_Tx,
     {INT_USART3_TCI, Int004_IRQn, &UART3_IRQHandler},
     /* USART RX conifg */
-    PortB, Pin03, Func_Usart3_Rx,
+    PortB, Pin04, Func_Usart3_Rx,
     {INT_USART3_RI, Int005_IRQn, &UART3_IRQHandler},
 };
 #endif /* BSP_USING_UART3 */
@@ -151,7 +151,7 @@ static hdsc_uart_t hdsc_uart_4 =
     PortB, Pin06, Func_Usart4_Tx,
     {INT_USART4_TCI, Int006_IRQn, &UART4_IRQHandler},
     /* USART RX conifg */
-    PortB, Pin07, Func_Usart4_Rx,
+    PortB, Pin03, Func_Usart4_Rx,
     {INT_USART4_RI, Int007_IRQn, &UART4_IRQHandler},
 };
 #endif /* BSP_USING_UART4 */
