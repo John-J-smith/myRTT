@@ -19,8 +19,6 @@
 #define BSP_USING_GPIOE
 #define BSP_USING_GPIOH
 
-#define __GPIO_BASE             (0x40053800ul) // defined in hc32f46x_gpio.c
-
 #define __PORT(port)            Port##port
 
 /* get the pin index in pin table */
@@ -53,20 +51,27 @@ int rt_hw_pin_init(void);
 
 /* Pin map */
 // led
-#define IO_ALARM_LED    GET_PIN(A, 8)
-#define IO_ACT_LED      GET_PIN(A, 10)
-#define IO_TX_LED       GET_PIN(A, 11)
-#define IO_RX_LED       GET_PIN(A, 12)
+#define IO_ACT_LED      GET_PIN(B, 14)
+#define IO_TX_LED       GET_PIN(B, 12)
+#define IO_RX_LED       GET_PIN(B, 13)
 
 // data flash write enable & chip select
-#define IO_FLASH_CS     GET_PIN(B, 13)
+#define IO_FLASH_CS     GET_PIN(A, 13)
 
 // spi1
 #define IO_SPI3_SCK     GET_PIN(B, 10)
 #define IO_SPI3_MISO    GET_PIN(B, 11)
 #define IO_SPI3_MOSI    GET_PIN(B, 12)
 
+#define IO_TR_RS485_1   GET_PIN(A, 4)
+#define IO_TR_RS485_2   GET_PIN(A, 2)
+#define IO_TR_RS485_3   GET_PIN(B, 7)
+#define IO_TR_RS485_4   GET_PIN(B, 5)
 
+#define IO_YX_DT_1      GET_PIN(B, 1)
+#define IO_YX_DT_2      GET_PIN(B, 0)
+#define IO_YX_DT_3      GET_PIN(A, 7)
+#define IO_YX_DT_4      GET_PIN(A, 6)
 
 #endif /* __GPIO_H__ */
 

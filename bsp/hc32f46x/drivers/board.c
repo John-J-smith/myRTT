@@ -107,7 +107,7 @@ void clock_init(void)
 
     /* MPLL config (XTAL / pllmDiv * plln / PllpDiv = 168M). (XTAL / 1 * 52 / 2) */
     stcMpllCfg.pllmDiv = 1ul;   //hrc 8
-    stcMpllCfg.plln = 52ul;    //hrc 168
+    stcMpllCfg.plln = 28ul;    //hrc 168
     stcMpllCfg.PllpDiv = 2ul;   //hrc 2
     stcMpllCfg.PllqDiv = 2ul;
     stcMpllCfg.PllrDiv = 2ul;
@@ -174,13 +174,13 @@ void rt_hw_board_init(void)
 	rt_hw_uart_init();
 
 #ifdef RT_USING_CONSOLE
-    rt_console_set_device(RT_CONSOLE_DEVICE_NAME);
+    //rt_console_set_device(RT_CONSOLE_DEVICE_NAME);
 #endif /* RT_USING_CONSOLE */
 
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
 #endif /* RT_USING_COMPONENTS_INIT */
 
-    rt_kprintf("build by %s toolchain\n", COMPILER_TYPE);
-    rt_kprintf("heap begin %x, end %x\n", (void *)HEAP_BEGIN, (void *)HEAP_END);
+    //rt_kprintf("build by %s toolchain\n", COMPILER_TYPE);
+    //rt_kprintf("heap begin %x, end %x\n", (void *)HEAP_BEGIN, (void *)HEAP_END);
 }

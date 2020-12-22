@@ -112,7 +112,6 @@
 
 #define RT_USING_LIBC
 #define RT_USING_POSIX
-#define RT_USING_MODULE
 
 /* Network */
 

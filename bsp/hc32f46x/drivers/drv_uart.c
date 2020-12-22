@@ -197,7 +197,7 @@ static rt_err_t uart_configure(struct rt_serial_device *serial, struct serial_co
                              PWC_FCG1_PERIPH_USART3 | PWC_FCG1_PERIPH_USART4;
     stc_usart_uart_init_t stcInitCfg = {
         UsartIntClkCkNoOutput,
-        UsartClkDiv_1,
+        UsartClkDiv_4,
         UsartDataBits8,
         UsartDataLsbFirst,
         UsartOneStopBit,
@@ -278,8 +278,9 @@ static rt_err_t uart_configure(struct rt_serial_device *serial, struct serial_co
     NVIC_ClearPendingIRQ(stcIrqRegiCfg.enIRQn);
     NVIC_EnableIRQ(stcIrqRegiCfg.enIRQn);*/
 
-    USART_FuncCmd(uart->base, UsartRx, Enable);
     USART_FuncCmd(uart->base, UsartTx, Enable);
+
+    USART_FuncCmd(uart->base, UsartRx, Enable);
     USART_FuncCmd(uart->base, UsartRxInt, Enable);
 
     return RT_EOK;
@@ -305,7 +306,8 @@ static rt_err_t uart_control(struct rt_serial_device *serial, int cmd, void *arg
         case RT_DEVICE_CTRL_SET_INT:
             if(ctrl_arg == RT_DEVICE_FLAG_INT_RX)
             {
-
+                USART_FuncCmd(uart->base, UsartRx, Enable);
+                USART_FuncCmd(uart->base, UsartRxInt, Enable);
             }
             else if(ctrl_arg == RT_DEVICE_FLAG_INT_TX)
             {
@@ -375,6 +377,8 @@ int rt_hw_uart_init(void)
 {
     struct serial_configure config = RT_SERIAL_CONFIG_DEFAULT;
     hdsc_uart_t *uart;
+
+    //config.baud_rate = BAUD_RATE_38400;
 
 #if defined(BSP_USING_UART1)
     uart = &hdsc_uart_1;

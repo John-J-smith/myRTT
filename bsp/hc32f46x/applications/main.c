@@ -14,7 +14,6 @@
 #include <fal.h>
 #include <easyflash.h>
 #include <dfs_posix.h> /* 当需要使用文件操作时，需要包含这个头文件 */
-#include <dlfcn.h> /* 动态库api */
 
 #ifndef ULOG_USING_SYSLOG
 #define LOG_TAG              "main"
@@ -31,27 +30,21 @@ void led_thread_entry(void* parameter)
 {
 #define interval 250
 
-    rt_pin_mode(IO_ALARM_LED, PIN_MODE_OUTPUT);
     rt_pin_mode(IO_ACT_LED, PIN_MODE_OUTPUT);
     rt_pin_mode(IO_RX_LED, PIN_MODE_OUTPUT);
     rt_pin_mode(IO_TX_LED, PIN_MODE_OUTPUT);
 
     while (1)
     {
-        rt_pin_write(IO_ALARM_LED, PIN_LOW);
+        /*rt_pin_write(IO_RX_LED, PIN_HIGH);
         rt_thread_mdelay(interval);
-        rt_pin_write(IO_ALARM_LED, PIN_HIGH);
-        rt_thread_mdelay(interval);
-
         rt_pin_write(IO_RX_LED, PIN_LOW);
         rt_thread_mdelay(interval);
-        rt_pin_write(IO_RX_LED, PIN_HIGH);
-        rt_thread_mdelay(interval);
 
-        rt_pin_write(IO_TX_LED, PIN_LOW);
-        rt_thread_mdelay(interval);
         rt_pin_write(IO_TX_LED, PIN_HIGH);
         rt_thread_mdelay(interval);
+        rt_pin_write(IO_TX_LED, PIN_LOW);
+        rt_thread_mdelay(interval);*/
 
         rt_pin_write(IO_ACT_LED, PIN_HIGH);
         rt_thread_mdelay(interval);
@@ -60,131 +53,159 @@ void led_thread_entry(void* parameter)
     }
 }
 
-/*
-int set_console_baud(int argc, char **argv)
+void YX_test_thread_entry(void* parameter)
 {
-    rt_device_t console_dev;
-    struct serial_configure cfg = RT_SERIAL_CONFIG_DEFAULT;
+    rt_pin_mode(IO_YX_DT_1, PIN_MODE_INPUT);
+    rt_pin_mode(IO_YX_DT_2, PIN_MODE_INPUT);
+    rt_pin_mode(IO_YX_DT_3, PIN_MODE_INPUT);
+    rt_pin_mode(IO_YX_DT_4, PIN_MODE_INPUT);
 
-    if(argc == 2)
+    rt_pin_write(IO_RX_LED, PIN_LOW);
+    rt_pin_write(IO_TX_LED, PIN_LOW);
+    rt_pin_write(IO_ACT_LED, PIN_LOW);
+    rt_pin_mode(IO_ACT_LED, PIN_MODE_OUTPUT);
+    rt_pin_mode(IO_RX_LED, PIN_MODE_OUTPUT);
+    rt_pin_mode(IO_TX_LED, PIN_MODE_OUTPUT);
+    rt_pin_write(IO_RX_LED, PIN_LOW);
+    rt_pin_write(IO_TX_LED, PIN_LOW);
+    rt_pin_write(IO_ACT_LED, PIN_LOW);
+
+    while (1)
     {
-        sscanf(argv[1], "%d", &cfg.baud_rate);
-    }
-    console_dev = rt_device_find("uart0");
-    if(console_dev != RT_NULL)
-    {
-        rt_device_control(console_dev, RT_DEVICE_CTRL_CONFIG, &cfg);
-    }
-
-    return 0;
-}
-MSH_CMD_EXPORT_ALIAS(set_console_baud, baud, set baudrate usage: baud 115200);
-*/
-
-void *dm_handle = RT_NULL;
-int dl_open(int argc, char **argv)
-{
-    rt_device_t console_dev;
-    struct serial_configure cfg = RT_SERIAL_CONFIG_DEFAULT;
-
-    if(argc == 2)
-    {
-        // 加载动态库
-        dm_handle = dlopen(argv[1], 0);
-        if(dm_handle == RT_NULL)
+        if(rt_pin_read(IO_YX_DT_1) && rt_pin_read(IO_YX_DT_2) && rt_pin_read(IO_YX_DT_3) && rt_pin_read(IO_YX_DT_4))
         {
-            LOG_E("load %s error", argv[1]);
-            return 0;
+            rt_pin_write(IO_RX_LED, PIN_LOW);
+            rt_pin_write(IO_TX_LED, PIN_LOW);
         }
         else
         {
-            LOG_I("load %s ok", argv[1]);
+            rt_pin_write(IO_RX_LED, PIN_HIGH);
+            rt_pin_write(IO_TX_LED, PIN_HIGH);
         }
+
+        rt_thread_mdelay(1);
     }
-
-    return 0;
 }
-MSH_CMD_EXPORT_ALIAS(dl_open, dlopen, load a dmodule);
 
-int dl_close(int argc, char **argv)
+void RS485_test_thread_entry(void* parameter)
 {
-    LOG_I("uninstall %x", dm_handle);
-    dlclose(dm_handle);
+#define BUF_SIZE 512
 
-    return 0;
+    rt_device_t rs485_1, rs485_2, rs485_3, rs485_4;
+    rt_uint8_t *buf = RT_NULL;
+    rt_uint32_t len = 0;
+
+    buf = (rt_uint8_t *)rt_malloc(BUF_SIZE);
+
+    rt_pin_mode(IO_TR_RS485_1, PIN_MODE_OUTPUT);
+    rt_pin_mode(IO_TR_RS485_2, PIN_MODE_OUTPUT);
+    rt_pin_mode(IO_TR_RS485_3, PIN_MODE_OUTPUT);
+    rt_pin_mode(IO_TR_RS485_4, PIN_MODE_OUTPUT);
+
+    // enable 485 input
+    rt_pin_write(IO_TR_RS485_1, PIN_LOW);
+    rt_pin_write(IO_TR_RS485_2, PIN_LOW);
+    rt_pin_write(IO_TR_RS485_3, PIN_LOW);
+    rt_pin_write(IO_TR_RS485_4, PIN_LOW);
+
+    if(RT_NULL == (rs485_1 = rt_device_find("uart1")))
+    {
+        LOG_E("uart 1 not found");
+    }
+    else
+    {
+        rt_device_open(rs485_1, RT_DEVICE_FLAG_RDWR | RT_DEVICE_FLAG_INT_RX);
+    }
+
+    if(RT_NULL == (rs485_2 = rt_device_find("uart2")))
+    {
+        LOG_E("uart 2 not found");
+    }
+    else
+    {
+        rt_device_open(rs485_2, RT_DEVICE_FLAG_RDWR | RT_DEVICE_FLAG_INT_RX);
+    }
+
+    if(RT_NULL == (rs485_3 = rt_device_find("uart3")))
+    {
+        LOG_E("uart 3 not found");
+    }
+    else
+    {
+        rt_device_open(rs485_3, RT_DEVICE_FLAG_RDWR | RT_DEVICE_FLAG_INT_RX);
+    }
+
+    if(RT_NULL == (rs485_4 = rt_device_find("uart4")))
+    {
+        LOG_E("uart 4 not found");
+    }
+    else
+    {
+        rt_device_open(rs485_4, RT_DEVICE_FLAG_RDWR | RT_DEVICE_FLAG_INT_RX);
+    }
+
+    rt_pin_write(IO_TR_RS485_1, PIN_HIGH);
+    rt_device_write(rs485_1, 0, "hello world 1\r\n", 17);
+    rt_pin_write(IO_TR_RS485_1, PIN_LOW);
+
+    rt_pin_write(IO_TR_RS485_2, PIN_HIGH);
+    rt_device_write(rs485_2, 0, "hello world 2\r\n", 17);
+    rt_pin_write(IO_TR_RS485_2, PIN_LOW);
+
+    rt_pin_write(IO_TR_RS485_3, PIN_HIGH);
+    rt_device_write(rs485_3, 0, "hello world 3\r\n", 17);
+    rt_pin_write(IO_TR_RS485_3, PIN_LOW);
+
+    rt_pin_write(IO_TR_RS485_4, PIN_HIGH);
+    rt_device_write(rs485_4, 0, "hello world 4\r\n", 17);
+    rt_pin_write(IO_TR_RS485_4, PIN_LOW);
+
+    while (1)
+    {
+        len = 0;
+        if((len = rt_device_read(rs485_1, 0, buf, BUF_SIZE)) > 0)
+        {
+            rt_pin_write(IO_TR_RS485_1, PIN_HIGH);
+            rt_device_write(rs485_1, 0, buf, len);
+            rt_thread_mdelay(1);
+            rt_pin_write(IO_TR_RS485_1, PIN_LOW);
+        }
+
+        len = 0;
+        if((len = rt_device_read(rs485_2, 0, buf, BUF_SIZE)) > 0)
+        {
+            rt_pin_write(IO_TR_RS485_2, PIN_HIGH);
+            rt_device_write(rs485_2, 0, buf, len);
+            rt_thread_mdelay(1);
+            rt_pin_write(IO_TR_RS485_2, PIN_LOW);
+        }
+
+        len = 0;
+        if((len = rt_device_read(rs485_3, 0, buf, BUF_SIZE)) > 0)
+        {
+            rt_pin_write(IO_TR_RS485_3, PIN_HIGH);
+            rt_device_write(rs485_3, 0, buf, len);
+            rt_thread_mdelay(1);
+            rt_pin_write(IO_TR_RS485_3, PIN_LOW);
+        }
+
+        len = 0;
+        if((len = rt_device_read(rs485_4, 0, buf, BUF_SIZE)) > 0)
+        {
+            rt_pin_write(IO_TR_RS485_4, PIN_HIGH);
+            rt_device_write(rs485_4, 0, buf, len);
+            rt_pin_write(IO_TR_RS485_4, PIN_LOW);
+        }
+
+        rt_thread_mdelay(1);
+    }
 }
-MSH_CMD_EXPORT_ALIAS(dl_close, dlclose, close a dmodule);
 
-// 声明需要链接的动态函数类型
-typedef int (*lib_func_t)(void);
-typedef int (*add_func_t)(int, int);
-typedef int (*multi_func_t)(int, int);
-int dmodule_test(const char *dll_path)
-{
-    void *dmodule_handle = RT_NULL;
-    // 声明动态函数指针
-    lib_func_t lib_func;
-    add_func_t add_func;
-    multi_func_t multi_func;
-
-    // 加载动态库
-    dmodule_handle = dlopen(dll_path, 0);
-    if(dmodule_handle == RT_NULL)
-    {
-        LOG_E("load %s error", dll_path);
-        return 0;
-    }
-    else
-    {
-        LOG_I("load %s ok", dll_path);
-    }
-
-    // 加载函数 int lib_func(void);
-    lib_func = dlsym(dmodule_handle, "lib_func");
-    if(lib_func == RT_NULL)
-    {
-        LOG_E("lib_func not found");
-    }
-    else
-    {
-        LOG_I("execute lib_func:");
-        lib_func();
-    }
-
-    // 加载函数 int add_func(int a, int b);
-    add_func = dlsym(dmodule_handle, "add_func");
-    if(add_func == RT_NULL)
-    {
-        LOG_E("add_func not found");
-    }
-    else
-    {
-        LOG_I("execute add_func(3, 4):");
-        add_func(3, 4);
-    }
-
-    // 加载函数 int multi_func(int a, int b);
-    multi_func = dlsym(dmodule_handle, "multi_func");
-    if(multi_func == RT_NULL)
-    {
-        LOG_E("multi_func not found");
-    }
-    else
-    {
-        LOG_I("execute multi_func(5, 6):");
-        multi_func(5, 6);
-    }
-    // 卸载动态库
-    dlclose(dmodule_handle);
-    LOG_I("uninstall %s", dll_path);
-
-    return 0;
-}
 
 int main(void)
 {
-    rt_thread_t led_thread_ptr;
-    rt_uint32_t reboot_cnt = 0, len = 0;
+    rt_thread_t led_thread_ptr, yx_thread_ptr, RS485_thread_ptr;
+    /*rt_uint32_t reboot_cnt = 0, len = 0;
     char reboot_cnt_buf[11];
 
     fal_init();
@@ -198,7 +219,7 @@ int main(void)
     reboot_cnt = atoi(reboot_cnt_buf);
     reboot_cnt++;
     rt_sprintf(reboot_cnt_buf, "%d", reboot_cnt);
-    ef_set_env("reboot_cnt", reboot_cnt_buf);
+    ef_set_env("reboot_cnt", reboot_cnt_buf);*/
 
     led_thread_ptr = rt_thread_create("led", led_thread_entry, RT_NULL, 256, 5, 1);
     if (led_thread_ptr != RT_NULL)
@@ -206,8 +227,17 @@ int main(void)
         rt_thread_startup(led_thread_ptr);
     }
 
-    dmodule_test("/lib.so");
-    dmodule_test("/lib2.so");
+    yx_thread_ptr = rt_thread_create("yx", YX_test_thread_entry, RT_NULL, 512, 2, 1);
+    if (yx_thread_ptr != RT_NULL)
+    {
+        rt_thread_startup(yx_thread_ptr);
+    }
+
+    RS485_thread_ptr = rt_thread_create("485", RS485_test_thread_entry, RT_NULL, 512, 4, 1);
+    if (RS485_thread_ptr != RT_NULL)
+    {
+        rt_thread_startup(RS485_thread_ptr);
+    }
 
     return RT_EOK;
 }

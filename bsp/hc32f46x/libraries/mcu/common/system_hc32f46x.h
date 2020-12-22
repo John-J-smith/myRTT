@@ -95,7 +95,7 @@ extern "C" {
 #endif
 
 #if !defined (XTAL_VALUE)
-#define XTAL_VALUE ((uint32_t)6553500)  /*!< External high speed OSC freq. */
+#define XTAL_VALUE ((uint32_t)12000000)  /*!< External high speed OSC freq. */
 #endif
 
 #if !defined (XTAL32_VALUE)
