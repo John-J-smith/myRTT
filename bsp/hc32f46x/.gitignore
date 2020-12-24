@@ -15,13 +15,13 @@
 build
 Debug
 documentation/html
-packages/
+
 *~
 *.o
 *.obj
 #*.out
 *.bak
-*.dep
+
 *.lib
 *.i
 *.d
