@@ -341,12 +341,11 @@
           <name>CCIncludePath2</name>
           <state />
           <state>$PROJ_DIR$\..\..\components\utilities\ymodem</state>
-          <state>$PROJ_DIR$\packages\fal-latest\porting</state>
           <state>$PROJ_DIR$\..\..\include</state>
           <state>$PROJ_DIR$\libraries\CMSIS\include</state>
-          <state>$PROJ_DIR$\packages\EasyFlash-master\inc</state>
-          <state>$PROJ_DIR$\packages\CmBacktrace-latest</state>
           <state>$PROJ_DIR$\packages\fal-latest\inc</state>
+          <state>$PROJ_DIR$\packages\CmBacktrace-latest</state>
+          <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
           <state>$PROJ_DIR$\.</state>
           <state>$PROJ_DIR$\libraries</state>
           <state>$PROJ_DIR$\applications</state>
@@ -354,7 +353,7 @@
           <state>$PROJ_DIR$\..\..\components\drivers\spi\sfud\inc</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\cortex-m0</state>
           <state>$PROJ_DIR$\..\..\components\drivers\include</state>
-          <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
+          <state>$PROJ_DIR$\drivers\package_porting</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\common</state>
           <state>$PROJ_DIR$\..\..\components\drivers\spi</state>
           <state>$PROJ_DIR$\..\..\components\finsh</state>
@@ -1375,12 +1374,11 @@
           <name>CCIncludePath2</name>
           <state />
           <state>$PROJ_DIR$\..\..\components\utilities\ymodem</state>
-          <state>$PROJ_DIR$\packages\fal-latest\porting</state>
           <state>$PROJ_DIR$\..\..\include</state>
           <state>$PROJ_DIR$\libraries\CMSIS\include</state>
-          <state>$PROJ_DIR$\packages\EasyFlash-master\inc</state>
-          <state>$PROJ_DIR$\packages\CmBacktrace-latest</state>
           <state>$PROJ_DIR$\packages\fal-latest\inc</state>
+          <state>$PROJ_DIR$\packages\CmBacktrace-latest</state>
+          <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
           <state>$PROJ_DIR$\.</state>
           <state>$PROJ_DIR$\libraries</state>
           <state>$PROJ_DIR$\applications</state>
@@ -1388,7 +1386,7 @@
           <state>$PROJ_DIR$\..\..\components\drivers\spi\sfud\inc</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\cortex-m0</state>
           <state>$PROJ_DIR$\..\..\components\drivers\include</state>
-          <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
+          <state>$PROJ_DIR$\drivers\package_porting</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\common</state>
           <state>$PROJ_DIR$\..\..\components\drivers\spi</state>
           <state>$PROJ_DIR$\..\..\components\finsh</state>
@@ -2194,37 +2192,13 @@
       <name>$PROJ_DIR$\drivers\drv_wdt.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\drivers\package_porting\fal_flash_sfud_port.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\drivers\package_porting\fal_eeprom_port.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\libraries\Config\IAR\startup_target_noload.s</name>
-    </file>
-  </group>
-  <group>
-    <name>EasyFlash</name>
-    <file>
-      <name>$PROJ_DIR$\packages\EasyFlash-master\src\easyflash.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_cmd.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_env.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_env_legacy.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_env_legacy_wl.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_iap.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_log.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\packages\EasyFlash-master\src\ef_utils.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\packages\EasyFlash-master\ports\ef_fal_port.c</name>
     </file>
   </group>
   <group>
@@ -2240,15 +2214,6 @@
     </file>
     <file>
       <name>$PROJ_DIR$\packages\fal-latest\src\fal_rtt.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\packages\fal-latest\porting\fal_data_flash_sfud_port.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\packages\fal-latest\porting\fal_on_chip_flash_port.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\packages\fal-latest\porting\fal_eeprom_port.c</name>
     </file>
   </group>
   <group>

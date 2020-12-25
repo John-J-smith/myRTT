@@ -161,15 +161,6 @@
 #define PKG_CMBACKTRACE_PRINT_ENGLISH
 #define PKG_USING_CMBACKTRACE_V10400
 #define PKG_CMBACKTRACE_VER_NUM 0x10400
-#define PKG_USING_EASYFLASH
-#define PKG_EASYFLASH_ENV
-#define PKG_EASYFLASH_ERASE_GRAN 4096
-#define PKG_EASYFLASH_WRITE_GRAN_1BIT
-#define PKG_EASYFLASH_WRITE_GRAN 1
-#define PKG_EASYFLASH_START_ADDR 0
-#define PKG_EASYFLASH_DEBUG
-#define PKG_USING_EASYFLASH_V410
-#define PKG_EASYFLASH_VER_NUM 0x40100
 
 /* system packages */
 
@@ -182,6 +173,9 @@
 #define PKG_USING_FAL_LATEST_VERSION
 #define PKG_FAL_VER_NUM 0x99999
 
+/* Micrium: Micrium software products porting for RT-Thread */
+
+
 /* peripheral libraries and drivers */
 
 
@@ -189,6 +183,9 @@
 
 
 /* samples: kernel and components samples */
+
+
+/* games: games run on RT-Thread console */
 
 
 /* Hardware Drivers Config */
