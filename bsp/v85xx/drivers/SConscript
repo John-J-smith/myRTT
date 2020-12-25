@@ -37,7 +37,19 @@ if GetDepend('BSP_USING_FLASH'):
 if GetDepend('BSP_USING_WDT'):
     src = src + ['drv_wdt.c']
     
-path =  [cwd]
+# fal package porting 
+if GetDepend(['FAL_USING_SFUD_PORT']):
+    if GetDepend('BSP_USING_FLASH'):
+        src += Glob('package_porting/fal_flash_sfud_port.c')
+        
+if GetDepend('BSP_USING_EEPROM'):
+    src += Glob('package_porting/fal_eeprom_port.c')
+    
+if GetDepend('BSP_USING_ONCHIP_FLASH'):
+    src += Glob('package_porting/fal_onchip_flash_port.c')
+    
+path = [cwd,
+        cwd + '/package_porting']
 
 if rtconfig.CROSS_TOOL == 'gcc':
     src += [cwd + '/../libraries/Config/IAR/startup_target_noload.s']
