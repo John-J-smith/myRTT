@@ -18,7 +18,10 @@ menu "Onboard Peripheral Drivers"
         bool "Enable data flash"
         select BSP_USING_SPI
         default y
-
+	
+	config BSP_USING_ONCHIP_FLASH
+        bool "Enable onchip flash"
+        default n
 endmenu
 
 menu "On-chip Peripheral Drivers"

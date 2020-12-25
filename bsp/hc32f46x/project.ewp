@@ -343,20 +343,22 @@
         <option>
           <name>CCIncludePath2</name>
           <state />
+          <state>$PROJ_DIR$\packages\cpu_usage-latest</state>
           <state>$PROJ_DIR$\..\..\components\libc\compilers\dlib</state>
           <state>$PROJ_DIR$\..\..\include</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\common</state>
           <state>$PROJ_DIR$\..\..\components\drivers\include</state>
           <state>$PROJ_DIR$\libraries\driver\inc</state>
           <state>$PROJ_DIR$\..\..\components\dfs\filesystems\devfs</state>
-          <state>$PROJ_DIR$\packages\CmBacktrace-latest</state>
+          <state>$PROJ_DIR$\drivers</state>
           <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
           <state>$PROJ_DIR$\..\..\components\utilities\ulog</state>
           <state>$PROJ_DIR$\.</state>
           <state>$PROJ_DIR$\libraries</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\cortex-m4</state>
-          <state>$PROJ_DIR$\..\..\components\drivers\spi\sfud\inc</state>
+          <state>$PROJ_DIR$\packages\CmBacktrace-v1.4.0</state>
           <state>$PROJ_DIR$\..\..\components\dfs\include</state>
+          <state>$PROJ_DIR$\..\..\components\drivers\spi\sfud\inc</state>
           <state>$PROJ_DIR$\libraries\CMSIS\include</state>
           <state>$PROJ_DIR$\..\..\components\drivers\spi</state>
           <state>$PROJ_DIR$\applications</state>
@@ -366,7 +368,7 @@
           <state>$PROJ_DIR$\..\..\components\utilities\ymodem</state>
           <state>$PROJ_DIR$\..\..\components\dfs\filesystems\elmfat</state>
           <state>$PROJ_DIR$\packages\fal-latest\inc</state>
-          <state>$PROJ_DIR$\drivers</state>
+          <state>$PROJ_DIR$\packages\EasyFlash-v4.1.0\inc</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1384,20 +1386,22 @@
         <option>
           <name>CCIncludePath2</name>
           <state />
+          <state>$PROJ_DIR$\packages\cpu_usage-latest</state>
           <state>$PROJ_DIR$\..\..\components\libc\compilers\dlib</state>
           <state>$PROJ_DIR$\..\..\include</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\common</state>
           <state>$PROJ_DIR$\..\..\components\drivers\include</state>
           <state>$PROJ_DIR$\libraries\driver\inc</state>
           <state>$PROJ_DIR$\..\..\components\dfs\filesystems\devfs</state>
-          <state>$PROJ_DIR$\packages\CmBacktrace-latest</state>
+          <state>$PROJ_DIR$\drivers</state>
           <state>$PROJ_DIR$\..\..\components\libc\compilers\common</state>
           <state>$PROJ_DIR$\..\..\components\utilities\ulog</state>
           <state>$PROJ_DIR$\.</state>
           <state>$PROJ_DIR$\libraries</state>
           <state>$PROJ_DIR$\..\..\libcpu\arm\cortex-m4</state>
-          <state>$PROJ_DIR$\..\..\components\drivers\spi\sfud\inc</state>
+          <state>$PROJ_DIR$\packages\CmBacktrace-v1.4.0</state>
           <state>$PROJ_DIR$\..\..\components\dfs\include</state>
+          <state>$PROJ_DIR$\..\..\components\drivers\spi\sfud\inc</state>
           <state>$PROJ_DIR$\libraries\CMSIS\include</state>
           <state>$PROJ_DIR$\..\..\components\drivers\spi</state>
           <state>$PROJ_DIR$\applications</state>
@@ -1407,7 +1411,7 @@
           <state>$PROJ_DIR$\..\..\components\utilities\ymodem</state>
           <state>$PROJ_DIR$\..\..\components\dfs\filesystems\elmfat</state>
           <state>$PROJ_DIR$\packages\fal-latest\inc</state>
-          <state>$PROJ_DIR$\drivers</state>
+          <state>$PROJ_DIR$\packages\EasyFlash-v4.1.0\inc</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -2097,13 +2101,13 @@
   <group>
     <name>cm_backtrace</name>
     <file>
-      <name>$PROJ_DIR$\packages\CmBacktrace-latest\cm_backtrace.c</name>
+      <name>$PROJ_DIR$\packages\CmBacktrace-v1.4.0\cm_backtrace.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\packages\CmBacktrace-latest\cmb_flash_log.c</name>
+      <name>$PROJ_DIR$\packages\CmBacktrace-v1.4.0\cmb_flash_log.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\packages\CmBacktrace-latest\cmb_port.c</name>
+      <name>$PROJ_DIR$\packages\CmBacktrace-v1.4.0\cmb_port.c</name>
     </file>
   </group>
   <group>
@@ -2122,6 +2126,15 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\libcpu\arm\cortex-m4\context_iar.S</name>
+    </file>
+  </group>
+  <group>
+    <name>cpu_usage</name>
+    <file>
+      <name>$PROJ_DIR$\packages\cpu_usage-latest\cpu_usage.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\packages\cpu_usage-latest\cpu_usage_cmd.c</name>
     </file>
   </group>
   <group>
@@ -2241,7 +2254,37 @@
       <name>$PROJ_DIR$\drivers\package_porting\fal_flash_sfud_port.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\drivers\package_porting\ef_fal_port.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\libraries\mcu\EWARM\config\startup_hc32f46x.s</name>
+    </file>
+  </group>
+  <group>
+    <name>EasyFlash</name>
+    <file>
+      <name>$PROJ_DIR$\packages\EasyFlash-v4.1.0\src\easyflash.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\packages\EasyFlash-v4.1.0\src\ef_cmd.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\packages\EasyFlash-v4.1.0\src\ef_env.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\packages\EasyFlash-v4.1.0\src\ef_env_legacy.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\packages\EasyFlash-v4.1.0\src\ef_env_legacy_wl.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\packages\EasyFlash-v4.1.0\src\ef_iap.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\packages\EasyFlash-v4.1.0\src\ef_log.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\packages\EasyFlash-v4.1.0\src\ef_utils.c</name>
     </file>
   </group>
   <group>

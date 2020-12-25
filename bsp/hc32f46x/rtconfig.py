@@ -26,7 +26,7 @@ elif CROSS_TOOL == 'keil':
     EXEC_PATH   = r'C:/Keil_v5'
 elif CROSS_TOOL == 'iar':
     PLATFORM    = 'iar'
-    EXEC_PATH   = r'D:/software and tools/iar 8.1'
+    EXEC_PATH   = r'D:/software/iar 8.1'
 
 if os.getenv('RTT_EXEC_PATH'):
     EXEC_PATH = os.getenv('RTT_EXEC_PATH')
